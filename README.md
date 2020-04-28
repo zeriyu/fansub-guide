@@ -23,12 +23,14 @@
     - [Random Distro Tools](#random-distro-tools)
   - [The Group Blog](#the-group-blog)
   - [Distro For Do It Yourself (DIY) People](#distro-for-do-it-yourself-diy-people)
-      - [__Remux__](#remux)
-      - [__In Service of Chaos: Analog__](#in-service-of-chaos-analog)
+    - [Remux](#remux)
+    - [In Service of Chaos: Analog](#in-service-of-chaos-analog)
 
 ## Fansubbing Overview
-- Theory [Anime Fansubbing History](//en.wikipedia.org/wiki/Fansub) and [The State of Fansubbing: It&#39;s Dead](http://www.crymore.net/2015/05/15/the-state-of-fansubbing-its-dead).
-- Doki&#39;s [Fansubbing Process Overview](//doki.co/support/the-fansubbing-process), [Portable Document Format (PDF)](//yukisubs.files.wordpress.com/2016/10/the_fansubbing_process_doki_fansubs.pdf), and this random [Idiot&#39;s Guide](//fansubbing.blogspot.com/2007/03/what-goes-into-fansub-aka-idiots-guide_05.html).
+
+Theory [Anime Fansubbing History](//en.wikipedia.org/wiki/Fansub) and [The State of Fansubbing: It&#39;s Dead](http://www.crymore.net/2015/05/15/the-state-of-fansubbing-its-dead).
+
+- Doki's [Fansubbing Process Overview](//doki.co/support/the-fansubbing-process), [Portable Document Format (PDF)](//yukisubs.files.wordpress.com/2016/10/the_fansubbing_process_doki_fansubs.pdf), and this random [Idiot&#39;s Guide](//fansubbing.blogspot.com/2007/03/what-goes-into-fansub-aka-idiots-guide_05.html).
 - __Implementation__: unanimated&#39;s [Guide Index](http://unanimated.xtreemhost.com/guides.htm), [PDF](//yukisubs.files.wordpress.com/2016/10/unanimated_fansub_guides.pdf). Alternatives:
   - Commie [Guides Index](//scribbles.moe/internshit-stuff).
   - SubsByRock [Index](//subsbyrock.wordpress.com/links).
@@ -39,7 +41,8 @@
 
 ## Capping
 
-- _Theory__: The idea is to obtain the source media.
+The idea is to obtain the source media.
+
 - The best sources are usually raw Digital Video Disc (DVD) or raw Blu-ray Disc Movie (BDMV) but uploads are not always available.
 - If not, then capping can also mean buying the retail media. Consider buying Anime DVDs/BDs to support the industry. Otherwise, existing VHS/LD/DVD/BD or web rips can be of acceptable quality.
 - For broadcast streams, capping means recording the analog stream and then digitizing it with special hardware or, for internet [simulcasts](//en.wikipedia.org/wiki/Simulcast) (digital), means [stream copying](//ffmpeg.org/ffmpeg.html#Stream-copy) with special software. Sometimes raws can also be obtained from invite-only private trackers. See the &quot;Remux&quot; section for capturing subtitles.
@@ -598,7 +601,7 @@
     - Also see this TODO: [TLS combined guide].
   - Use SSL-Lab&#39;s [SSL Server Test](//www.ssllabs.com/ssltest) to verify the configuration once everything is set up.
 
-#### __Remux__
+### Remux
 
 - __Theory__: Remuxers typically focus on improving work done by other groups, combining work done by multiple groups and/or combing subs with better Audio/Visual (A/V) sources.
 - __Subtitle Preprocessing Tools__:
@@ -636,7 +639,7 @@
   - Remember to put the CRC32 in [ ] at the end of the filename (e.g. myfile_[1BA919D7].mkv). (See: Random Distro Tools for details.)
 5. Distro (See: Distro).
 
-#### __In Service of Chaos: Analog__
+### In Service of Chaos: Analog
 
 - &quot;Digital is an exercise in precision, while analog was an exercise in controlled chaos.&quot; -[digitalfaq.com](http://www.digitalfaq.com/guides/video/capture-understand-sources.htm), [Forums](http://www.digitalfaq.com/forum).
 - __Analog Video Broadcasting History__: (fascinating btw)
