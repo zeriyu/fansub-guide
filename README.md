@@ -8,8 +8,8 @@
   - [Fansubbing Overview](#fansubbing-overview)
   - [Capping](#capping)
   - [Encoding](#encoding)
-  - [__Muxing and Demuxing__](#muxing-and-demuxing)
-  - [__Filtering__](#filtering)
+  - [Muxing and Demuxing](#muxing-and-demuxing)
+  - [Filtering](#filtering)
   - [Translating (TL) + Translate Check (TLC)](#translating-tl--translate-check-tlc)
   - [Timing, Fine Timing, Scene Timing, Key Frame Timing (KFT), Karaoke Timing (KT)](#timing-fine-timing-scene-timing-key-frame-timing-kft-karaoke-timing-kt)
   - [Editing + Quality Check (QC)](#editing--quality-check-qc)
@@ -21,16 +21,16 @@
     - [File Transfer Protocol (FTP)](#file-transfer-protocol-ftp)
     - [Newsgroups](#newsgroups)
     - [Random Distro Tools](#random-distro-tools)
-  - [The Group Blog](#the-group-blog)
-  - [Distro For Do It Yourself (DIY) People](#distro-for-do-it-yourself-diy-people)
-    - [Remux](#remux)
-    - [In Service of Chaos: Analog](#in-service-of-chaos-analog)
+    - [The Group Blog](#the-group-blog)
+    - [Distro For Do It Yourself (DIY) People](#distro-for-do-it-yourself-diy-people)
+      - [Remux](#remux)
+      - [In Service of Chaos: Analog](#in-service-of-chaos-analog)
 
 ## Fansubbing Overview
 
 Theory [Anime Fansubbing History](//en.wikipedia.org/wiki/Fansub) and [The State of Fansubbing: It&#39;s Dead](http://www.crymore.net/2015/05/15/the-state-of-fansubbing-its-dead).
 
-- Doki's [Fansubbing Process Overview](//doki.co/support/the-fansubbing-process), [Portable Document Format (PDF)](//yukisubs.files.wordpress.com/2016/10/the_fansubbing_process_doki_fansubs.pdf), and this random [Idiot&#39;s Guide](//fansubbing.blogspot.com/2007/03/what-goes-into-fansub-aka-idiots-guide_05.html).
+- [[PDF](pdf/fansubbing-process-doki.pdf)] [Doki's Fansubbing Process Overview](//doki.co/support/the-fansubbing-process), and this random [Idiot&#39;s Guide](//fansubbing.blogspot.com/2007/03/what-goes-into-fansub-aka-idiots-guide_05.html).
 - __Implementation__: unanimated&#39;s [Guide Index](http://unanimated.xtreemhost.com/guides.htm), [PDF](//yukisubs.files.wordpress.com/2016/10/unanimated_fansub_guides.pdf). Alternatives:
   - Commie [Guides Index](//scribbles.moe/internshit-stuff).
   - SubsByRock [Index](//subsbyrock.wordpress.com/links).
@@ -195,7 +195,7 @@ The idea is to obtain the source media.
   - Or just use an [High-Definition Multimedia Interface](http://www.hdmi.org/consumer/hdmi_advantage.aspx) (HDMI) cable (audio + video) to connect a laptop to a TV temporarily. [HDMI FAQ](http://www.hdmi.org/learningcenter/faq.aspx).
 - __QC__ (?): [Bitrate Viewer](http://www.winhoros.de/docs/bitrate-viewer) Able to estimate the quality of MPEG1 and MPEG2 streams. I do not know how this is useful but Etzimal said to add it. o_o*
 
-## __Muxing and Demuxing__
+## Muxing and Demuxing
 
 - __Theory__: For muxing, the idea is to take multiple discrete files (video, audio, subtitles, fonts) and merge them together into a single file for playback. For demuxing, the idea is to take one file that contains multiple streams and extract out at least one of them.
 - Muxing typically means shortening, lengthening or delaying streams for syncing. Shortening and delaying are compatible with stream copying techniques. However, any lengthening or modifications done mid-stream will typically require transcoding the entire stream. Thus, the two tasks (encoding and muxing) overlap somewhat.
@@ -228,7 +228,7 @@ The idea is to obtain the source media.
   - Baal&#39;s [How To: Synchronize Two Audio Tracks For Muxing With Audacity](//kametsu.com/topic/45949-how-to-synchronize-two-audio-tracks-for-muxing-with-audacity).
   - Catar&#39;s [Standards of Muxed Releases](//kametsu.com/topic/62012-the-ctr-muxing-standards-guide). Note: The emphasis is on media server compatible dual audio releases.
 
-## __Filtering__
+## Filtering
 
 - __Preface__: To avoid transcoding multiple times or transferring losslessly encoded video, ideally, Filtering and Encoding should be done by the same person.
 - __Theory__: Filtering tasks beyond [IVTC](http://foro.doom9.org/ivtc-tut.htm) can be thought of as an optional sub-task for encoders. Common filtering tasks include triming length, cutting out advertisements, correcting various studio mistakes and improving subjective visual quality.
@@ -554,7 +554,7 @@ The idea is to obtain the source media.
     - Or [xdelta3 GUI](//osdn.net/projects/sfnet_xdelta3-gui) for GUI people. Also see: Moodkiller&#39;s [xdelta3 rebooted fork](https://github.com/Moodkiller/xdelta3-gui-2.0).
   - A binary version of xdelta3.exe can be obtained from the above patch examples or from [xdelta3 GUI](//osdn.net/projects/sfnet_xdelta3-gui).
 
-## The Group Blog
+### The Group Blog
 
 - __Theory__: Provide a way to centralize knowledge about your group including the following:
   - Latest release information, project archive, download options (Torrents/HTTP/XDCC/fserve), contact information (IRC/Email), community feedback mechanisms (chatbox), declared waifus, guides for the community, and donation solicitation.
@@ -568,7 +568,7 @@ The idea is to obtain the source media.
   - [Markdown Cheatsheet](//github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
   - [Markdown Preview](//stackedit.io/app), [v4](//stackedit.io/editor), and HTML converter.
 
-## Distro For Do It Yourself (DIY) People
+### Distro For Do It Yourself (DIY) People
 
 - __General Mandatory Reading__
   - [The Internet and Hosting Providers](//esoterictek.blogspot.com/2016/10/the-internet-and-hosting-providers.html).
@@ -601,7 +601,7 @@ The idea is to obtain the source media.
     - Also see this TODO: [TLS combined guide].
   - Use SSL-Lab&#39;s [SSL Server Test](//www.ssllabs.com/ssltest) to verify the configuration once everything is set up.
 
-### Remux
+#### Remux
 
 - __Theory__: Remuxers typically focus on improving work done by other groups, combining work done by multiple groups and/or combing subs with better Audio/Visual (A/V) sources.
 - __Subtitle Preprocessing Tools__:
@@ -639,7 +639,7 @@ The idea is to obtain the source media.
   - Remember to put the CRC32 in [ ] at the end of the filename (e.g. myfile_[1BA919D7].mkv). (See: Random Distro Tools for details.)
 5. Distro (See: Distro).
 
-### In Service of Chaos: Analog
+#### In Service of Chaos: Analog
 
 - &quot;Digital is an exercise in precision, while analog was an exercise in controlled chaos.&quot; -[digitalfaq.com](http://www.digitalfaq.com/guides/video/capture-understand-sources.htm), [Forums](http://www.digitalfaq.com/forum).
 - __Analog Video Broadcasting History__: (fascinating btw)
