@@ -1,9 +1,5 @@
-- __Note__: If any links are broken or you know of any more useful guides, please [contact me](//yukisubs.wordpress.com/about) with any suggestions.
-- Last Updated: 2018June27
-- Markdown available [here](https://gist.github.com/YukinoAi/acea024631a2585aa592b16b4bde959f).
-
 # Fansubbing and Encoding Guides Index
-  
+
 - [Fansubbing and Encoding Guides Index](#fansubbing-and-encoding-guides-index)
   - [Fansubbing Overview](#fansubbing-overview)
   - [Capping](#capping)
@@ -14,6 +10,13 @@
   - [Timing, Fine Timing, Scene Timing, Key Frame Timing (KFT), Karaoke Timing (KT)](#timing-fine-timing-scene-timing-key-frame-timing-kft-karaoke-timing-kt)
   - [Editing + Quality Check (QC)](#editing--quality-check-qc)
   - [Typesetting](#typesetting)
+    - [Styling](#styling)
+    - [Typeset](#typeset)
+    - [Karaoke Effects (KFX)](#karaoke-effects-kfx)
+      - [Prerequisite reading](#prerequisite-reading)
+      - [Working with templates](#working-with-templates)
+      - [Kara Effector](#kara-effector)
+      - [Creating KFX](#creating-kfx)
   - [Distribute (Distro)](#distribute-distro)
     - [#1: Torrents](#1-torrents)
     - [#2: Hyper Text Transport Protocol (HTTP) (+ Transport Layer Security (TLS))](#2-hyper-text-transport-protocol-http--transport-layer-security-tls)
@@ -23,15 +26,27 @@
     - [Random Distro Tools](#random-distro-tools)
     - [The Group Blog](#the-group-blog)
     - [Distro For Do It Yourself (DIY) People](#distro-for-do-it-yourself-diy-people)
-      - [Remux](#remux)
-      - [In Service of Chaos: Analog](#in-service-of-chaos-analog)
+      - [General Mandatory Reading](#general-mandatory-reading)
+      - [DNS/Dynamic DNS (DDNS)](#dnsdynamic-dns-ddns)
+      - [Raspberry Pi](#raspberry-pi)
+      - [Seedbox Software](#seedbox-software)
+      - [HTTP File Server](#http-file-server)
+      - [TLS](#tls)
+  - [Remux](#remux)
+    - [Subtitle Preprocessing Tools](#subtitle-preprocessing-tools)
+    - [Workflow](#workflow)
+  - [In Service of Chaos: Analog](#in-service-of-chaos-analog)
+    - [Analog Video Broadcasting History__: (fascinating btw)](#analog-video-broadcasting-history-fascinating-btw)
+    - [Analog Decoding and Artifacting](#analog-decoding-and-artifacting)
+    - [Consumer Media Overview and Resources](#consumer-media-overview-and-resources)
+    - [Analog Capture Guides](#analog-capture-guides)
 
 ## Fansubbing Overview
 
-Theory [Anime Fansubbing History](//en.wikipedia.org/wiki/Fansub) and [The State of Fansubbing: It&#39;s Dead](http://www.crymore.net/2015/05/15/the-state-of-fansubbing-its-dead).
+Theory [Anime Fansubbing History](//en.wikipedia.org/wiki/Fansub) and [The State of Fansubbing: It's Dead](http://www.crymore.net/2015/05/15/the-state-of-fansubbing-its-dead) [[PDF](pdf/the-state-of-fansubbing-its-dead-crymore.pdf)].
 
 - [[PDF](pdf/fansubbing-process-doki.pdf)] [Doki's Fansubbing Process Overview](//doki.co/support/the-fansubbing-process), and this random [Idiot&#39;s Guide](//fansubbing.blogspot.com/2007/03/what-goes-into-fansub-aka-idiots-guide_05.html).
-- __Implementation__: unanimated&#39;s [Guide Index](http://unanimated.xtreemhost.com/guides.htm), [PDF](//yukisubs.files.wordpress.com/2016/10/unanimated_fansub_guides.pdf). Alternatives:
+- __Implementation__: unanimated&#39;s [Guide Index](http://unanimated.hostfree.pw/guides.htm), [PDF](//yukisubs.files.wordpress.com/2016/10/unanimated_fansub_guides.pdf). Alternatives:
   - Commie [Guides Index](//scribbles.moe/internshit-stuff).
   - SubsByRock [Index](//subsbyrock.wordpress.com/links).
 - [Aegisub](http://docs.aegisub.org/manual/Overview): the core tool for fansubbers. [Binaries](http://plorkyeran.com/aegisub).
@@ -396,7 +411,7 @@ The idea is to obtain the source media.
   2. Official Standard or Informal English: Crunchyroll, Funimation, official DVD-BD are a close second.
   3. Localized: Commie/DesuYo/FFF are heavily localized memsubs. Avoid unless you knowingly like localization. They are good sources for sign typesetting when combined with dialogue from 1-2 above.
   4. Hadena subs are so not even funny to the point where it is not even not funny anymore and becomes funny again.
-    - Note: The point here is not to comment on Hadena, but rather as to counter editorial minimalism. If the subs are good, leave them alone, but if they are really bad, then change everything.
+     - Note: The point here is not to comment on Hadena, but rather as to counter editorial minimalism. If the subs are good, leave them alone, but if they are really bad, then change everything.
   5. A lot of remuxers combine existing subs with better/worse Audio and Video (A/V). The subs quality is usually the same as whoever they ripped them from.
   6. Censoring exists (sex-gore), in both dialogue and in A/V. Be wary of this from broadcast streams, especially non-Japanese ones, including older DVDs.
 - Use Crymore&#39;s [Translation Parties](http://www.crymore.net/category/translation-party/) to figure out what type of editing you like, start with [this one](http://www.crymore.net/2016/01/18/translation-party-commie-vs-doki-chihiro-vs-funimation-vs-mori-dagashi-kashi-episode-01). They take a while but will save time later on by being able to start from &quot;better&quot; subs and having to edit them less overall.
@@ -405,13 +420,25 @@ The idea is to obtain the source media.
 
 ## Typesetting
 
-- __Theory__: Typesetting is mostly making sure the subtitle dialogue is visually legible and signs look like they are natively part of the video. Typesetting can also extend to styling the opening, ending and insert songs, including fancy karaoke. [More theory](//collectr.blogspot.com/search/label/typesetting).
-- The most important part of typesetting is also the simplest: make sure the dialogue is readable. Check out [Underwater&#39;s Styling Guide - PDF](//yukisubs.files.wordpress.com/2018/02/subtitlestyling_byunderwater.pdf). In summary:
+### Styling
+
+Check out **Underwater's Styling Guide** [[PDF](pdf/styling-guide-underwater.pdf)].
+In summary:
+
   1. Use white as the primary color.
   2. Have a very dark border (black).
   3. Use a readable font, like Arial or [Roboto](//fonts.google.com/specimen/Roboto), in bold.
   4. Make it large enough to see without squinting.
-- While Typesetting is actually quite strait-forward, doing it efficiently and well is something else entirely.
+
+### Typeset
+
+Theory: Typesetting is mostly making sure the subtitle dialogue is visually legible and signs look like they are natively part of the video. Typesetting can also extend to styling the opening, ending and insert songs, including fancy karaoke.
+
+[More theory](//collectr.blogspot.com/search/label/typesetting).
+The most important part of typesetting is also the simplest: make sure the dialogue is readable.
+
+While Typesetting is actually quite strait-forward, doing it efficiently and well is something else entirely.
+
 - unanimated&#39;s [Guide to Typesetting in Aegisub](http://unanimated.xtreemhost.com/ts/index.htm), [RAR](//www.mediafire.com/file/t3zkwtzc1t33tpg/TypesettingGuide2015-03-25.rar), [RAR mirror](//mega.nz/#F!wUYwDSgA!8tx_37HUBcs9KqPhkk5FmQ), [PDF](//yukisubs.files.wordpress.com/2016/10/typesetting_in_aegisub_-_unanimated_-_20oct16.pdf).
 - unanimated&#39;s [Aegisub scripts](http://unanimated.xtreemhost.com/ts/scripts-unanimated.htm), [PDF](//yukisubs.files.wordpress.com/2016/10/unanimated_aegisub_scripts.pdf) and [Typesetting Tools](//github.com/TypesettingTools). iamevn&#39;s [mirror](//github.com/iamevn/unanimated-Aegisub-Scripts).
 - Commie&#39;s [Typesetting in Aegisub](http://commiesubs.com/interns/ts/index.htm), [PDF](//yukisubs.files.wordpress.com/2016/10/commie_typesetting_in_aegisub.pdf) and [Scripts for Aegisub - ZIP](//mega.nz/#F!wUYwDSgA!8tx_37HUBcs9KqPhkk5FmQ).
@@ -422,36 +449,51 @@ The idea is to obtain the source media.
 - Creative typsetting ideas: [maxfireheart.blogspot.in](//maxfireheart.blogspot.in).
 - Advanced: Koby&#39;s [ASS Draw Shapes](//kametsu.com/topic/3090-ass-draw-shapes-for-subtitle-scripts) used for typesetting and KFX.
 - Advanced: [Typsetting With Adobe Illustrator](//blog.line0.eu/typesetting-with-illustrator-and-ai2ass-part-i-the-basics) by Line0 and [related Blog](//blog.line0.eu).
-- __Karaoke Effects (KFX):__
-- Theory: This is an optional subcategory of typesetting that adds additional special effects to karaoke. Usually, KFX refers to effects beyond simple k-timing. KFX can be added to k-timed lines by applying a KFX template, modifying existing effects, or creating new effects. Some KFX can exist in softsub.ass but others must be pre-rendered (hardcoded) either because the tool to create them draws on the video stream directly, independent of k-timing, or because dynamically rendering the effect would cause severe stuttering during playback.
-- As with all typesetting, applying KFX can actually be quite strait-forward, but creating and modifying new and visually appealing KFX is something else entirely. [More intro](//jockotan.wordpress.com/2015/08/12/the-basics-of-kfx).
-- Prerequisite reading:
-  - How to Karaoke Templater: [1](http://docs.aegisub.org/manual/Karaoke_Templater_Tutorial_1) and [2](http://docs.aegisub.org/manual/Karaoke_Templater_Tutorial_2).
-  - [&quot;Where do I start learning?&quot;](http://forum.aegisub.org/viewtopic.php?f=13&t=1566), [PDF](//yukisubs.files.wordpress.com/2017/09/aegisubforums-howtolearnmakingkaraoke-by-jfs.pdf) - An introduction to KFX concepts by jfs.
-- Working with templates:
-  - Basic: [kfx templates by ai-chan](http://forum.aegisub.org/viewtopic.php?f=13&t=1222), [ZIP - Mega](//mega.nz/#F!wUYwDSgA!8tx_37HUBcs9KqPhkk5FmQ) (subtitles-kfx).
-  - Recommended: [Kara Effector](//github.com/KaraEffect0r/Kara_Effector) is a lua plugin for Aegisub that focuses on modifying provided templates. It has a lot of them and basic modifications (shapes, colors, duration, quantity) are strait-forward. Most of the documentation, [PDF](//yukisubs.files.wordpress.com/2017/05/kara-effector-usage-guide-1-39.pdf), is in Spanish.
-    - Kara Effector 3.4 for Aegisub 3.2.2: [Mediafire](//www.mediafire.com/file/bbb2msh84v3y8d3/Kara+Effector+3.4+%5Bfv20.02.17%5D.rar), [Mega](//mega.nz/#F!wUYwDSgA!8tx_37HUBcs9KqPhkk5FmQ) (subtitles-kfx-Kara Effector) and the [older 3.3 version](//www.mediafire.com/file/s3y4c7m439l113w/Kara+Effector+3.3+%5Bfv24.06.16%5D.rar).
-      - Kara Effector Usage Guide (1-39): Chapter PDFs available on [Mega](//mega.nz/#F!0lVXQKaJ!lOse3jVveeEqWQouBE0ekg), or see this [combined PDF (1-39)](//yukisubs.files.wordpress.com/2017/05/kara-effector-usage-guide-1-39.pdf).
-      - [Youtube installation video](//www.youtube.com/watch?v=AC0YZq1tDDs), [Facebook page](//www.facebook.com/karaeffector), [Youtube homepage](//www.youtube.com/channel/UCcFmL4la4IT5HziLd9a_d7w) and some [examples](//www.youtube.com/channel/UCJWQDouAf2nxvHJwdYE-Iag).
-      - Random KE formatted KFX: Mega [1](//mega.nz/#F!V9Um0JJL!uhcTl3v444RyE8gpqO8lHg) and [2, KFX_Archive_May17.zip](//mega.nz/#F!wUYwDSgA!8tx_37HUBcs9KqPhkk5FmQ) (subtitles-kfx-Kara Effector).
-- Creating KFX:
-  - Read this again: [&quot;Where do I start learning?&quot;](http://forum.aegisub.org/viewtopic.php?f=13&t=1566), [PDF](//yukisubs.files.wordpress.com/2017/09/aegisubforums-howtolearnmakingkaraoke-by-jfs.pdf) and use templates instead.
-  - Very professional looking KFX can also be created using Adobe [After Effects (AE)](http://www.adobe.com/products/aftereffects.html).
-  - Further reading: Aegisub&#39;s [Automation 4 Lua Overview](http://docs.aegisub.org/3.2/Automation/Lua/), some [Lua Tutorials](http://lua-users.org/wiki/TutorialDirectory) and [Programming in Lua by Roberto Ierusalimschy (3rd Edition), PDF](//yukisubs.files.wordpress.com/2017/05/programming-in-lua-3ed.pdf).
-  - Further adventures: NyuFX. [Youtube](//www.youtube.com/playlist?list=PL52E2DB0433C204F2), [SourceForge](//sourceforge.net/projects/nyufx), and [Github](//github.com/Youka/NyuFX).
-  - Further adventures2: SSB. [Home thread](http://forum.aegisub.org/viewtopic.php?f=10&t=66095), [Youtube demo](//www.youtube.com/user/Youkakun/videos) and [SourceForge](//sourceforge.net/projects/ssbrenderer).
+
+### Karaoke Effects (KFX)
+
+Theory: This is an optional subcategory of typesetting that adds additional special effects to karaoke. Usually, KFX refers to effects beyond simple k-timing. KFX can be added to k-timed lines by applying a KFX template, modifying existing effects, or creating new effects.
+
+Some KFX can exist in softsub.ass but others must be pre-rendered (hardcoded) either because the tool to create them draws on the video stream directly, independent of k-timing, or because dynamically rendering the effect would cause severe stuttering during playback.
+
+As with all typesetting, applying KFX can actually be quite strait-forward, but creating and modifying new and visually appealing KFX is something else entirely. [More intro](//jockotan.wordpress.com/2015/08/12/the-basics-of-kfx).
+
+#### Prerequisite reading
+
+- How to Karaoke Templater: [1](http://docs.aegisub.org/manual/Karaoke_Templater_Tutorial_1) and [2](http://docs.aegisub.org/manual/Karaoke_Templater_Tutorial_2).
+- [&quot;Where do I start learning?&quot;](http://forum.aegisub.org/viewtopic.php?f=13&t=1566), [PDF](//yukisubs.files.wordpress.com/2017/09/aegisubforums-howtolearnmakingkaraoke-by-jfs.pdf) - An introduction to KFX concepts by jfs.
+
+#### Working with templates
+
+- Basic: [kfx templates by ai-chan](http://forum.aegisub.org/viewtopic.php?f=13&t=1222), [ZIP - Mega](//mega.nz/#F!wUYwDSgA!8tx_37HUBcs9KqPhkk5FmQ) (subtitles-kfx).
+
+#### Kara Effector
+
+[Kara Effector](//github.com/KaraEffect0r/Kara_Effector) is a lua plugin for Aegisub that focuses on modifying provided templates. It has a lot of them and basic modifications (shapes, colors, duration, quantity) are strait-forward. Most of the documentation, [PDF](//yukisubs.files.wordpress.com/2017/05/kara-effector-usage-guide-1-39.pdf), is in Spanish.
+
+- Kara Effector 3.4 for Aegisub 3.2.2: [Mediafire](//www.mediafire.com/file/bbb2msh84v3y8d3/Kara+Effector+3.4+%5Bfv20.02.17%5D.rar), [Mega](//mega.nz/#F!wUYwDSgA!8tx_37HUBcs9KqPhkk5FmQ) (subtitles-kfx-Kara Effector) and the [older 3.3 version](//www.mediafire.com/file/s3y4c7m439l113w/Kara+Effector+3.3+%5Bfv24.06.16%5D.rar)
+- Kara Effector Usage Guide (1-39): Chapter PDFs available on [Mega](//mega.nz/#F!0lVXQKaJ!lOse3jVveeEqWQouBE0ekg), or see this [combined PDF (1-39)](//yukisubs.files.wordpress.com/2017/05/kara-effector-usage-guide-1-39.pdf).
+- [Youtube installation video](//www.youtube.com/watch?v=AC0YZq1tDDs), [Facebook page](//www.facebook.com/karaeffector), [Youtube homepage](//www.youtube.com/channel/UCcFmL4la4IT5HziLd9a_d7w) and some [examples](//www.youtube.com/channel/UCJWQDouAf2nxvHJwdYE-Iag).
+- Random KE formatted KFX: Mega [1](//mega.nz/#F!V9Um0JJL!uhcTl3v444RyE8gpqO8lHg) and [2, KFX_Archive_May17.zip](//mega.nz/#F!wUYwDSgA!8tx_37HUBcs9KqPhkk5FmQ) (subtitles-kfx-Kara Effector).
+
+#### Creating KFX
+
+- Read this again: [&quot;Where do I start learning?&quot;](http://forum.aegisub.org/viewtopic.php?f=13&t=1566), [PDF](//yukisubs.files.wordpress.com/2017/09/aegisubforums-howtolearnmakingkaraoke-by-jfs.pdf) and use templates instead.
+- Very professional looking KFX can also be created using Adobe [After Effects (AE)](http://www.adobe.com/products/aftereffects.html).
+- Further reading: Aegisub&#39;s [Automation 4 Lua Overview](http://docs.aegisub.org/3.2/Automation/Lua/), some [Lua Tutorials](http://lua-users.org/wiki/TutorialDirectory) and [Programming in Lua by Roberto Ierusalimschy (3rd Edition), PDF](//yukisubs.files.wordpress.com/2017/05/programming-in-lua-3ed.pdf).
+- Further adventures: NyuFX. [Youtube](//www.youtube.com/playlist?list=PL52E2DB0433C204F2), [SourceForge](//sourceforge.net/projects/nyufx), and [Github](//github.com/Youka/NyuFX).
+- Further adventures2: SSB. [Home thread](http://forum.aegisub.org/viewtopic.php?f=10&t=66095), [Youtube demo](//www.youtube.com/user/Youkakun/videos) and [SourceForge](//sourceforge.net/projects/ssbrenderer).
 
 ## Distribute (Distro)
 
 ### #1: Torrents
 
 - Basic: [Introduction to BitTorrent Protocol](http://bittorrent.org/introduction.html), [Beginner&#39;s Guide](//lifehacker.com/285489/a-beginners-guide-to-bittorrent), [WikiBooks](//en.wikibooks.org/wiki/The_World_of_Peer-to-Peer_%28P2P%29/Networks_and_Protocols/BitTorrent), [Wikipedia](//en.wikipedia.org/wiki/BitTorrent).
-  
+
 - Technical: [BitTorrent in Detail](//yukisubs.files.wordpress.com/2016/10/bittorrent_in_detail_tampere_uni_of_technology.pdf), [Specification](//wiki.theory.org/BitTorrentSpecification), and [BitTorrent Enhancement Proposals (BEPs)](http://bittorrent.org/beps/bep_0000.html).
-  
+
 - __Client Side__:
-  
+
   - Recommended: [qBitTorrent](http://www.qbittorrent.org). Cross-platform cross-architecture and open source.
   - Windows only alternative: [uTorrent 2.2.1](http://www.oldversion.com/windows/download/utorrent-2-2-1-2) (this exact version).
     - Important: set [net.discoverable to false](//yukisubs.files.wordpress.com/2018/06/utorrent_settingschange_by_bakabt.png).
@@ -469,18 +511,17 @@ The idea is to obtain the source media.
     - Golumpa&#39;s [AniDexPy](https://github.com/Golumpa/AniDexPy). A simple Python tool for uploading to AniDex via its API.
   - Note: This only distributes the meta-file. For the distribution of the content, use a [seedbox](//en.wikipedia.org/wiki/Seedbox).
 - __Seedbox Theory__:
-  
+
   - [Seedboxes](//en.wikipedia.org/wiki/Seedbox) are servers that provide BitTorrent services. They can be implemented locally or rented commerically.
   - As per [Introduction to BitTorrent Protocol](http://bittorrent.org/introduction.html), any BitTorrent client-side software can potentially be used as seedbox software.
   - Commercially, the most popular client to use for Seedbox [SaaS](//en.wikipedia.org/wiki/Software_as_a_service) offerings is [rTorrent](//github.com/rakshasa/rtorrent/wiki), [rTorrent ArchWiki](//wiki.archlinux.org/index.php/RTorrent), with the [ruTorrent](//wiki.archlinux.org/index.php/RuTorrent) frontend.
   - [Reddit/r/Seedboxes](//reddit.com/r/seedboxes).
   - For information on setting up a local seedbox please see &quot;__Distro For Do It Yourself (DIY) People__&quot;.
 - __BitTorrent Tracker Theory__:
-  
+
   - Since backend tracker software is meant to be always active on high performance connections and require constant maintenance, it is not recommended to run one. Use existing trackers instead. However if interested, read this: [BitTorrent Tracker Theory](//esoterictek.blogspot.com/2016/10/bittorrent-tracker-theory.html).
   - There are also a number of low capacity PHP trackers designed for PHP enabled web servers and standalone tracker software executables intended to be run temporarily.
 - Misc [Tutorials and Guides](//torrentinvites.org/f29/).
-  
 
 ### #2: Hyper Text Transport Protocol (HTTP) (+ Transport Layer Security (TLS))
 
@@ -562,7 +603,7 @@ The idea is to obtain the source media.
   1. (optional) Read [The Internet and Hosting Providers](//esoterictek.blogspot.com/2016/10/the-internet-and-hosting-providers.html) to know how the internet works and how much services cost.
   2. (optional) Purchase a mygroup.moe domain from [Hover](//hover.com) for ~$20 (yearly). Alternative registrars: [get.moe](http://get.moe).
   3. Start a blog on [Blogger](//www.blogger.com) or [Wordpress](//wordpress.com).
-    - Note: Wordpress and Weebly charge for custom domains and Blogger will disable TLS.
+     - Note: Wordpress and Weebly charge for custom domains and Blogger will disable TLS.
   4. Post releases. [Example](//doki.co).
 - Markdown (formatting for blog posts):
   - [Markdown Cheatsheet](//github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
@@ -570,19 +611,26 @@ The idea is to obtain the source media.
 
 ### Distro For Do It Yourself (DIY) People
 
-- __General Mandatory Reading__
-  - [The Internet and Hosting Providers](//esoterictek.blogspot.com/2016/10/the-internet-and-hosting-providers.html).
-  - Port Forwarding [theory](//en.wikipedia.org/wiki/Port_forwarding) and [related guide](//www.noip.com/support/knowledgebase/general-port-forwarding-guide).
-  - [Setting Up A Server](//wiki.installgentoo.com/index.php/Setting_up_a_Server) (including a [VPS](//en.wikipedia.org/wiki/Virtual_private_server)) and [Security Policy](//wiki.installgentoo.com/index.php/Setting_up_a_Server#Recommended_security_policy).
-  - Using Crontab [Guide 1](//help.ubuntu.com/community/CronHowto) and [Guide 2](http://www.unixgeeks.org/security/newbie/unix/cron-1.html) to start tasks at startup. See: [this example](//gist.github.com/gdiaz384/343e3704dc1f955e6bd904d384566cb4).
-- __DNS/Dynamic DNS (DDNS)__
-  - [FreeDNS Client Update Protocol Client List](//freedns.afraid.org/scripts/freedns.clients.php), DD-WRT DDNS [Guide 1](http://www.stevejenkins.com/blog/2014/11/using-freedns-afraid-org-with-dd-wrt-when-you-lose-your-free-dyndns-or-d-link-ddns-account) and [Guide 2](//freedns.afraid.org/guide/dd-wrt/).
-  - Namecheap&#39;s [DDNS Information](https://www.namecheap.com/support/knowledgebase/category.aspx/11/dynamic-dns) and [DDNS host guide](https://www.namecheap.com/support/knowledgebase/article.aspx/43/11/how-do-i-set-up-a-host-for-dynamic-dns).
-- __Raspberry Pi__
-  - [raspberryPi](//www.raspberrypi.org), [Documentation](//www.raspberrypi.org/documentation) and [Ebay Search Link](//www.ebay.com/sch/i.html?_nkw=raspberry+pi+3b%2B).
-  - Hint: Use external storage over USB instead the Secure Digital (SD) card internal storage.
-  - Be sure to set up [Remote Access](//www.raspberrypi.org/documentation/remote-access): [SSH](//www.raspberrypi.org/documentation/remote-access/ssh/README.md), [VNC](//www.raspberrypi.org/documentation/remote-access/vnc/README.md), (and maybe) [Samba](//www.raspberrypi.org/magpi/samba-file-server/).
-- __Seedbox Software__
+#### General Mandatory Reading
+
+- [The Internet and Hosting Providers](//esoterictek.blogspot.com/2016/10/the-internet-and-hosting-providers.html).
+- Port Forwarding [theory](//en.wikipedia.org/wiki/Port_forwarding) and [related guide](//www.noip.com/support/knowledgebase/general-port-forwarding-guide).
+- [Setting Up A Server](//wiki.installgentoo.com/index.php/Setting_up_a_Server) (including a [VPS](//en.wikipedia.org/wiki/Virtual_private_server)) and [Security Policy](//wiki.installgentoo.com/index.php/Setting_up_a_Server#Recommended_security_policy).
+- Using Crontab [Guide 1](//help.ubuntu.com/community/CronHowto) and [Guide 2](http://www.unixgeeks.org/security/newbie/unix/cron-1.html) to start tasks at startup. See: [this example](//gist.github.com/gdiaz384/343e3704dc1f955e6bd904d384566cb4).
+
+#### DNS/Dynamic DNS (DDNS)
+
+- [FreeDNS Client Update Protocol Client List](//freedns.afraid.org/scripts/freedns.clients.php), DD-WRT DDNS [Guide 1](http://www.stevejenkins.com/blog/2014/11/using-freedns-afraid-org-with-dd-wrt-when-you-lose-your-free-dyndns-or-d-link-ddns-account) and [Guide 2](//freedns.afraid.org/guide/dd-wrt/).
+- Namecheap&#39;s [DDNS Information](https://www.namecheap.com/support/knowledgebase/category.aspx/11/dynamic-dns) and [DDNS host guide](https://www.namecheap.com/support/knowledgebase/article.aspx/43/11/how-do-i-set-up-a-host-for-dynamic-dns).
+
+#### Raspberry Pi
+
+- [raspberryPi](//www.raspberrypi.org), [Documentation](//www.raspberrypi.org/documentation) and [Ebay Search Link](//www.ebay.com/sch/i.html?_nkw=raspberry+pi+3b%2B).
+- Hint: Use external storage over USB instead the Secure Digital (SD) card internal storage.
+- Be sure to set up [Remote Access](//www.raspberrypi.org/documentation/remote-access): [SSH](//www.raspberrypi.org/documentation/remote-access/ssh/README.md), [VNC](//www.raspberrypi.org/documentation/remote-access/vnc/README.md), (and maybe) [Samba](//www.raspberrypi.org/magpi/samba-file-server/).
+
+#### Seedbox Software
+
 - [rTorrent](//wiki.archlinux.org/index.php/RTorrent) with the [ruTorrent](//wiki.archlinux.org/index.php/RuTorrent) frontend is popular due to very low resource utilization and high performance. Installations and management are usually automated:
   - [Quickbox](//quickbox.io), [Github](//github.com/QuickBox/QB) (recommended).
     - Only works for x86_64 on certain Ubuntu/Debian versions:
@@ -590,106 +638,123 @@ The idea is to obtain the source media.
 - [qBittorrent](http://www.qbittorrent.org), [Wiki](//github.com/qbittorrent/qBittorrent/wiki), is cross platform and cross-architecture.
   - `sudo apt-get install -y qbittorrent`
   - Or compile it to get the latest v3.x version: [official compiling documentation](//github.com/qbittorrent/qBittorrent/wiki/Compiling-qBittorrent-on-Debian-and-Ubuntu), [arm7 compile instructions](//gist.github.com/jDmacD/9e38542901b9672728f088abd353a0a1) and [Banana seedbox](https://github.com/qbittorrent/qBittorrent/wiki/Compiling-qBittorrent-on-Raspbian-for-LeMaker-Banana-Pro). v4.x requires QT5. [Have fun](https://wiki.qt.io/Native_Build_of_Qt_5.4.1_on_a_Raspberry_Pi).
-- __HTTP File Server__
-  - List of [Static HTTP Server Software](//gist.github.com/willurd/5720255).
-    - Consider using the asynchronous &quot;HTTP-Server&quot; implemented using Node.js. See: [this guide](//gist.github.com/gdiaz384/94d3800fd5b3465fe7010917563581cd).
-  - Apache and Nginx have various issues recursively auto-indexing mounted Fat32 formatted volumes via directory junctions. Just FYI~
+
+#### HTTP File Server
+
+- List of [Static HTTP Server Software](//gist.github.com/willurd/5720255).
+  - Consider using the asynchronous &quot;HTTP-Server&quot; implemented using Node.js. See: [this guide](//gist.github.com/gdiaz384/94d3800fd5b3465fe7010917563581cd).
+- Apache and Nginx have various issues recursively auto-indexing mounted Fat32 formatted volumes via directory junctions. Just FYI~
   - Please no but... [HFS ~ HTTP File Server](http://www.rejetto.com/hfs) (Windows only).
-- __TLS__
-  - For encryption check out stunnel: [Features List](//www.stunnel.org/features.html), this [install guide](//www.digitalocean.com/community/tutorials/how-to-set-up-an-ssl-tunnel-using-stunnel-on-ubuntu).
-  - For authentication check out [LetsEncrypt](//letsencrypt.org/docs) and the following resources: the [EFF&#39;s Certbot](//certbot.eff.org), stunnel&#39;s [LetsEncrypt configuration](//community.letsencrypt.org/t/configure-stunnel/3611) and this guide on [Configuring Cipher Suites Correctly](//weakdh.org/sysadmin.html).
-    - Also see this TODO: [TLS combined guide].
-  - Use SSL-Lab&#39;s [SSL Server Test](//www.ssllabs.com/ssltest) to verify the configuration once everything is set up.
 
-#### Remux
+#### TLS
 
-- __Theory__: Remuxers typically focus on improving work done by other groups, combining work done by multiple groups and/or combing subs with better Audio/Visual (A/V) sources.
-- __Subtitle Preprocessing Tools__:
-  - Sushi&#39;s [Audio Based Subtitle Shifter](//github.com/tp7/Sushi). [Guide](//iamscum.wordpress.com/other-useful-stuff/using-sushi).
-  - eXmendiC&#39;s [timing script](//iamscum.wordpress.com/auto-fixing-official-subs). Note: I have not tested this.
-  - [Notepad++](//notepad-plus-plus.org). Supports &quot;Find and Replace&quot; across many files simultaneously.
-    - [py3stringReplace](//github.com/gdiaz384/py3stringReplace). Automated version of Notepad++&#39;s &quot;Find and Replace&quot;.
-  - Aegisub&#39;s [Timing Post Processor (TPP)](http://docs.aegisub.org/manual/Timing_Post-Processor).
-  - Kageru&#39;s [snap_scenechanges.py](//gist.github.com/kageru/0e4b4f0e8b443c59552b66d5f8b55d93).
-  - iamevn&#39;s [combine_lines.py](https://gist.github.com/iamevn/b21e60f6a9d572cbc5197a143f46d258).
-- __Workflow__:
+- For encryption check out stunnel: [Features List](//www.stunnel.org/features.html), this [install guide](//www.digitalocean.com/community/tutorials/how-to-set-up-an-ssl-tunnel-using-stunnel-on-ubuntu).
+- For authentication check out [LetsEncrypt](//letsencrypt.org/docs) and the following resources: the [EFF&#39;s Certbot](//certbot.eff.org), stunnel&#39;s [LetsEncrypt configuration](//community.letsencrypt.org/t/configure-stunnel/3611) and this guide on [Configuring Cipher Suites Correctly](//weakdh.org/sysadmin.html).
+  - Also see this TODO: [TLS combined guide].
+- Use SSL-Lab&#39;s [SSL Server Test](//www.ssllabs.com/ssltest) to verify the configuration once everything is set up.
 
-1. Obtain raws (See: Capping).
+## Remux
+
+Remuxers typically focus on improving work done by other groups, combining work done by multiple groups and/or combing subs with better Audio/Visual (A/V) sources.
+
+### Subtitle Preprocessing Tools
+
+- Sushi&#39;s [Audio Based Subtitle Shifter](//github.com/tp7/Sushi). [Guide](//iamscum.wordpress.com/other-useful-stuff/using-sushi).
+- eXmendiC&#39;s [timing script](//iamscum.wordpress.com/auto-fixing-official-subs). Note: I have not tested this.
+- [Notepad++](//notepad-plus-plus.org). Supports &quot;Find and Replace&quot; across many files simultaneously.
+  - [py3stringReplace](//github.com/gdiaz384/py3stringReplace). Automated version of Notepad++&#39;s &quot;Find and Replace&quot;.
+- Aegisub&#39;s [Timing Post Processor (TPP)](http://docs.aegisub.org/manual/Timing_Post-Processor).
+- Kageru&#39;s [snap_scenechanges.py](//gist.github.com/kageru/0e4b4f0e8b443c59552b66d5f8b55d93).
+- iamevn&#39;s [combine_lines.py](https://gist.github.com/iamevn/b21e60f6a9d572cbc5197a143f46d258).
+
+### Workflow
+
+1. Obtain raws (See: [Capping](#capping)).
 2. Obtain scripts.
-  1. Find out which groups did the series:
-    - [Anime DataBase (AniDB)](//anidb.net).
-    - Search Nyaa, Anidex.moe, bakabt, etc.
+   1. Find out which groups did the series:
+      - [Anime DataBase (AniDB)](//anidb.net).
+      - Search Nyaa, Anidex.moe, bakabt, etc.
       - Shortcut: [AnimeTosho](//animetosho.org)&#39;s &quot;Attachments&quot; section.
-    - [ar-fansub-db.blogspot.com](//ar-fansub-db.blogspot.com) and [arfansubdb.com](http://arfansubdb.com) (Arabic, Hint: Use Chrome&#39;s translation feature.).
-  2. Obtain the subs or files.mkv from the group.
-    - Check their website for HTTP or torrent links.
-    - Check the BitTorrent tracker the group uses.
-    - Check their IRC channel and look for an XDCC bot.
-    - If you can find out the exact name of their files, use @find in rizon.net&#39;s #news and give it to Google.
-    - Ask the group over IRC or email (unlikely to work).
-    - [This one russian site](http://subs.com.ru) sometimes has scripts.
-      - Use [Notepad++](//notepad-plus-plus.org/download) to change the character encoding to UTF-8 if necessary.
-  3. If you can obtain the files.mkv, then stream copy or extract them out. (See: Muxing)
-    - Only if hardcore: [Extracting Hardsubs](//redonesubs.blogspot.com/p/extracting-hardsubs.html), [docx](//yukisubs.files.wordpress.com/2016/10/extracting_hardsubs_-_redone_subs_-_20oct16.docx), by Zalis.
-      - [Extracting Hardsubs](//jumonjigiri.blogspot.com/p/extracting-hardsubs.html) addendum by Jumonji-Giri.
-    - Alternatively: [AVISubDetector](https://www.videohelp.com/software/AVISubDetector), [guide - PDF](//yukisubs.files.wordpress.com/2018/02/avisubdetector_guide_howtoripthetimingandenglishsubsfromanavifileusingavisubdetector.pdf) + [py3avi2bdnxml](https://github.com/gdiaz384/py3avi2bdnxml) + [BDSup2Sub](https://www.videohelp.com/software/BDSup2Sub) can create subtitles that [look like this](https://imgur.com/a/y7Mz2) (Czech example).
+      - [ar-fansub-db.blogspot.com](//ar-fansub-db.blogspot.com) and [arfansubdb.com](http://arfansubdb.com) (Arabic, Hint: Use Chrome&#39;s translation feature.).
+   2. Obtain the subs or files.mkv from the group.
+      - Check their website for HTTP or torrent links.
+      - Check the BitTorrent tracker the group uses.
+      - Check their IRC channel and look for an XDCC bot.
+      - If you can find out the exact name of their files, use @find in rizon.net&#39;s #news and give it to Google.
+      - Ask the group over IRC or email (unlikely to work).
+      - [This one russian site](http://subs.com.ru) sometimes has scripts.
+         - Use [Notepad++](//notepad-plus-plus.org/download) to change the character encoding to UTF-8 if necessary.
+   3. If you can obtain the files.mkv, then stream copy or extract them out. (See: Muxing)
+      - Only if hardcore: [Extracting Hardsubs](//redonesubs.blogspot.com/p/extracting-hardsubs.html), [docx](//yukisubs.files.wordpress.com/2016/10/extracting_hardsubs_-_redone_subs_-_20oct16.docx), by Zalis.
+        - [Extracting Hardsubs](//jumonjigiri.blogspot.com/p/extracting-hardsubs.html) addendum by Jumonji-Giri.
+      - Alternatively: [AVISubDetector](https://www.videohelp.com/software/AVISubDetector), [guide - PDF](//yukisubs.files.wordpress.com/2018/02/avisubdetector_guide_howtoripthetimingandenglishsubsfromanavifileusingavisubdetector.pdf) + [py3avi2bdnxml](https://github.com/gdiaz384/py3avi2bdnxml) + [BDSup2Sub](https://www.videohelp.com/software/BDSup2Sub) can create subtitles that [look like this](https://imgur.com/a/y7Mz2) (Czech example).
 3. Fix any issues (like localizations and syncing issues) (See: Filtering, Encoding, TLC, Editing, Timing, Typesetting).
 4. Mux to preserve the changes (See: Muxing).
-  - It is considered rude to use an existing groups tag in the filename, even if only minor changes were made. Use any other tag, none, a throw-away one, or your own nickname. To give them credit, label the tracks with the original source group name and credit them in any descriptions.
-  - Remember to put the CRC32 in [ ] at the end of the filename (e.g. myfile_[1BA919D7].mkv). (See: Random Distro Tools for details.)
+   - It is considered rude to use an existing groups tag in the filename, even if only minor changes were made. Use any other tag, none, a throw-away one, or your own nickname. To give them credit, label the tracks with the original source group name and credit them in any descriptions.
+   - Remember to put the CRC32 in [ ] at the end of the filename (e.g. myfile_[1BA919D7].mkv). (See: Random Distro Tools for details.)
 5. Distro (See: Distro).
 
-#### In Service of Chaos: Analog
+## In Service of Chaos: Analog
 
-- &quot;Digital is an exercise in precision, while analog was an exercise in controlled chaos.&quot; -[digitalfaq.com](http://www.digitalfaq.com/guides/video/capture-understand-sources.htm), [Forums](http://www.digitalfaq.com/forum).
-- __Analog Video Broadcasting History__: (fascinating btw)
-  - Presentation slides on [Analog Communication Systems](http://slideplayer.com/slide/3990945/).
+Digital is an exercise in precision, while analog was an exercise in controlled chaos.&quot; -[digitalfaq.com](http://www.digitalfaq.com/guides/video/capture-understand-sources.htm), [Forums](http://www.digitalfaq.com/forum).
+
+### Analog Video Broadcasting History__: (fascinating btw)
+
+- Presentation slides on [Analog Communication Systems](http://slideplayer.com/slide/3990945/).
+- YouTube videos:
+- [Technology Connections](//www.youtube.com/channel/UCy0tKL1T7wFoYcxCe0xjN6Q/videos) (YouTube channel).
+  - Before electronic television, there was [Mechanical Television](//www.youtube.com/watch?v=v5OANXk-6-w).
+  - [Philo Farnsworth and the Invention of Electronic Television](//www.youtube.com/watch?v=NUaowcXQtOo).
+  - [Lines of Light: How Analog Television Works](//www.youtube.com/watch?v=l4UgZBs7ZGo).
+  - How Analog Color TV Works [The Beginnings](//www.youtube.com/watch?v=dX649lnKAU0), Part 2: [Compatible Color](//www.youtube.com/watch?v=InrDRGTPqnE) and Part 3: [more stuff](//www.youtube.com/watch?v=3JFt6t6ijLs).
+  - [These Are Not Pixels: Revisited](//www.youtube.com/watch?v=Ea6tw-gulnQ).
+  - [Trinitron: Sony&#39;s Once Unbeatable Product](//www.youtube.com/watch?v=0aFhzGEBQlk).
+    - [Why is TV 29.97 frames per second?](//www.youtube.com/watch?v=3GJUM6pCpew)
+
+### Analog Decoding and Artifacting
+
+- An introduction to artifacts and [TV and Video Comb Filters](http://www.cockam.com/vidcomb.htm).
+- [Contrasting Comb Filter Types](https://www.extron.com/company/article.aspx?id=ntscdb4).
+- Interesting [case study](https://hometheaterhifi.com/volume_9_2/runco-pfp-11-video-processor-4-2002-part-2.html).
+- [Timebase Corrector (TBC) FAQ](http://www.digitalfaq.com/forum/video-restore/2251-tbc-time-base.html) and [preface](http://www.digitalfaq.com/forum/video-restore/1853-alternative-avt-8710-a.html#post9889).
+
+### Consumer Media Overview and Resources
+
+- Wiki on video: [Composite](//en.wikipedia.org/wiki/Composite_video), [S-Video](//en.wikipedia.org/wiki/S-Video), [Component](https://en.wikipedia.org/wiki/YPbPr).
+- Wiki on audio: TODO: stuff here.
+  - [Toslink or Coax](http://thewelltemperedcomputer.com/Intro/SQ/Toslink_Coax.htm)?
+- Interesting [case study](//hometheaterhifi.com/volume_8_4/toshiba-sd-K700-dvd-player-12-2001.html).
+- __VHS__: Up to 3 Mhz of analog video on magnetic tape with 240 lines of resolution.
+  - VHS Player [User Manual Index](http://www.digitalfaq.com/forum/vcr-repair/2668-index-user-manuals.html).
   - YouTube videos:
-  - [Technology Connections](//www.youtube.com/channel/UCy0tKL1T7wFoYcxCe0xjN6Q/videos) (YouTube channel).
-    - Before electronic television, there was [Mechanical Television](//www.youtube.com/watch?v=v5OANXk-6-w).
-    - [Philo Farnsworth and the Invention of Electronic Television](//www.youtube.com/watch?v=NUaowcXQtOo).
-    - [Lines of Light: How Analog Television Works](//www.youtube.com/watch?v=l4UgZBs7ZGo).
-    - How Analog Color TV Works [The Beginnings](//www.youtube.com/watch?v=dX649lnKAU0), Part 2: [Compatible Color](//www.youtube.com/watch?v=InrDRGTPqnE) and Part 3: [more stuff](//www.youtube.com/watch?v=3JFt6t6ijLs).
-    - [These Are Not Pixels: Revisited](//www.youtube.com/watch?v=Ea6tw-gulnQ).
-    - [Trinitron: Sony&#39;s Once Unbeatable Product](//www.youtube.com/watch?v=0aFhzGEBQlk).
-      - [Why is TV 29.97 frames per second?](//www.youtube.com/watch?v=3GJUM6pCpew)
-- __Analog Decoding and Artifacting__:
-  - An introduction to artifacts and [TV and Video Comb Filters](http://www.cockam.com/vidcomb.htm).
-  - [Contrasting Comb Filter Types](https://www.extron.com/company/article.aspx?id=ntscdb4).
-  - Interesting [case study](https://hometheaterhifi.com/volume_9_2/runco-pfp-11-video-processor-4-2002-part-2.html).
-  - [Timebase Corrector (TBC) FAQ](http://www.digitalfaq.com/forum/video-restore/2251-tbc-time-base.html) and [preface](http://www.digitalfaq.com/forum/video-restore/1853-alternative-avt-8710-a.html#post9889).
-- __Consumer Media Overview and Resources__:
-  - Wiki on video: [Composite](//en.wikipedia.org/wiki/Composite_video), [S-Video](//en.wikipedia.org/wiki/S-Video), [Component](https://en.wikipedia.org/wiki/YPbPr).
-  - Wiki on audio: TODO: stuff here.
-    - [Toslink or Coax](http://thewelltemperedcomputer.com/Intro/SQ/Toslink_Coax.htm)?
-  - Interesting [case study](//hometheaterhifi.com/volume_8_4/toshiba-sd-K700-dvd-player-12-2001.html).
-  - __VHS__: Up to 3 Mhz of analog video on magnetic tape with 240 lines of resolution.
-    - VHS Player [User Manual Index](http://www.digitalfaq.com/forum/vcr-repair/2668-index-user-manuals.html).
-    - YouTube videos:
-    - [The Impossible Feat inside Your VCR](//www.youtube.com/watch?v=KfuARMCyTvg).
-    - Why Sony&#39;s Beta Videotape System Failed: [Part 1](//www.youtube.com/watch?v=FyKRubB5N60) and [Part 2](//www.youtube.com/watch?v=v019trxfcmg).
-    - [Comparing Beta and VHS](//www.youtube.com/watch?v=_oJs8-I9WtA).
-  - __Laserdisc__: Up to 5 Mhz of analog video on a digital disc with 400-425 lines of resolution. Supports CD quality digital audio, and sometimes encoded AC3 or DTS.
-    - [Forums](http://forum.lddb.com/) and [reddit](//www.reddit.com/r/LaserDisc/). Related [library](https://yukisubs.files.wordpress.com/2018/06/antcufaalb_ld_library.jpg).
-    - Youtube Videos:
-    - [Laserdisc: An Introduction](//www.youtube.com/watch?v=Eg8tK1LpLS8).
-    - [Laserdisc&#39;s Failure: What Went Wrong](//www.youtube.com/watch?v=TClRRMFZ7Sw).
-    - [Laserdisc: Features, Follies & Evolution](//www.youtube.com/watch?v=Nbo2QepTZNY).
-    - [DVD: The Death Knell of Laserdisc](//www.youtube.com/watch?v=cvwuAKi1ZB4).
-    - [MUSE Hi-Vision Laserdisc: The Blu-ray of 1994](//www.youtube.com/watch?v=behaBgwnB8M).
-    - The most boring video ever on optical media and Laserdiscs: Pioneer&#39;s [Video Tuning Fork volume 1](//www.youtube.com/watch?v=G2HBG7HrY7s&list=PLs8mgmDyfwJfhcSCHwcb4R4V0KI0LGCGO). Please skip this one.
-    - Further viewing: Overview of the [Pioneer CLD-M301](//www.youtube.com/watch?v=L6iyUSnrGk0).
-- __Analog Capture Guides__: The idea is to digitize the analog audio and video signals.
-  - Digital FAQ&#39;s [Guides Index](http://www.digitalfaq.com/guides/video.htm).
-  - [Understanding Video Sources](http://www.digitalfaq.com/guides/video/capture-understand-sources.htm).
-  - [Introduction to Digital Video Capturing, Recording TV](http://www.digitalfaq.com/guides/video/introduction-record-capture.htm).
-  - VirtualDub settings guides: [Using VirtualDub to Capture AVI](http://www.digitalfaq.com/guides/video/capture-avi-virtualdub.htm) and [related discussion](http://www.digitalfaq.com/forum/video-capture/7427-capturing-virtualdub-settings.html).
-  - Comparison of Laserdisc capture hardware via [screenshot comparisons](//originaltrilogy.com/topic/Laserdisc-players-screenshot-comparison/id/12907).
-  - Lossless [HDMI capture comparisons](https://forum.videohelp.com/threads/376473-Lossless-HDMI-capture-devices-comparison-screenshots) (for passthrough configurations).
-  - [8mm](//www.google.com/search?q=8mm+film+reels&source=lnms&tbm=isch): [Reddit wiki](//www.reddit.com/r/8mm/wiki/index).
-  - Video Home System (VHS): [How to Rip VHS](http://anarchivism.org/w/How_to_Rip_VHS).
-    - [Video Hardware Suggestions; Best VCRs to Convert Tape to Digital](http://www.digitalfaq.com/guides/video/capture-playback-hardware.htm).
-  - LaserDisc (LD): [How to Rip Laserdisc](http://anarchivism.org/w/How_to_Rip_Laserdisc) and [reddit topic](//www.reddit.com/r/LaserDisc/comments/3eqqhq/ripping_laserdiscs).
-  - Outdated but interesting:
-    - [Video Workflows: Capture MPEG-2 for DVD](http://www.digitalfaq.com/guides/video/dvd-workflows-mpeg2.htm).
-    - [Good Methods to Create DVDs (Video Workflows)](http://www.digitalfaq.com/guides/video/dvd-workflows.htm).
+  - [The Impossible Feat inside Your VCR](//www.youtube.com/watch?v=KfuARMCyTvg).
+  - Why Sony&#39;s Beta Videotape System Failed: [Part 1](//www.youtube.com/watch?v=FyKRubB5N60) and [Part 2](//www.youtube.com/watch?v=v019trxfcmg).
+  - [Comparing Beta and VHS](//www.youtube.com/watch?v=_oJs8-I9WtA).
+- __Laserdisc__: Up to 5 Mhz of analog video on a digital disc with 400-425 lines of resolution. Supports CD quality digital audio, and sometimes encoded AC3 or DTS.
+  - [Forums](http://forum.lddb.com/) and [reddit](//www.reddit.com/r/LaserDisc/). Related [library](https://yukisubs.files.wordpress.com/2018/06/antcufaalb_ld_library.jpg).
+  - Youtube Videos:
+  - [Laserdisc: An Introduction](//www.youtube.com/watch?v=Eg8tK1LpLS8).
+  - [Laserdisc&#39;s Failure: What Went Wrong](//www.youtube.com/watch?v=TClRRMFZ7Sw).
+  - [Laserdisc: Features, Follies & Evolution](//www.youtube.com/watch?v=Nbo2QepTZNY).
+  - [DVD: The Death Knell of Laserdisc](//www.youtube.com/watch?v=cvwuAKi1ZB4).
+  - [MUSE Hi-Vision Laserdisc: The Blu-ray of 1994](//www.youtube.com/watch?v=behaBgwnB8M).
+  - The most boring video ever on optical media and Laserdiscs: Pioneer&#39;s [Video Tuning Fork volume 1](//www.youtube.com/watch?v=G2HBG7HrY7s&list=PLs8mgmDyfwJfhcSCHwcb4R4V0KI0LGCGO). Please skip this one.
+  - Further viewing: Overview of the [Pioneer CLD-M301](//www.youtube.com/watch?v=L6iyUSnrGk0).
+
+### Analog Capture Guides
+
+The idea is to digitize the analog audio and video signals.
+
+- Digital FAQ&#39;s [Guides Index](http://www.digitalfaq.com/guides/video.htm).
+- [Understanding Video Sources](http://www.digitalfaq.com/guides/video/capture-understand-sources.htm).
+- [Introduction to Digital Video Capturing, Recording TV](http://www.digitalfaq.com/guides/video/introduction-record-capture.htm).
+- VirtualDub settings guides: [Using VirtualDub to Capture AVI](http://www.digitalfaq.com/guides/video/capture-avi-virtualdub.htm) and [related discussion](http://www.digitalfaq.com/forum/video-capture/7427-capturing-virtualdub-settings.html).
+- Comparison of Laserdisc capture hardware via [screenshot comparisons](//originaltrilogy.com/topic/Laserdisc-players-screenshot-comparison/id/12907).
+- Lossless [HDMI capture comparisons](https://forum.videohelp.com/threads/376473-Lossless-HDMI-capture-devices-comparison-screenshots) (for passthrough configurations).
+- [8mm](//www.google.com/search?q=8mm+film+reels&source=lnms&tbm=isch): [Reddit wiki](//www.reddit.com/r/8mm/wiki/index).
+- Video Home System (VHS): [How to Rip VHS](http://anarchivism.org/w/How_to_Rip_VHS).
+  - [Video Hardware Suggestions; Best VCRs to Convert Tape to Digital](http://www.digitalfaq.com/guides/video/capture-playback-hardware.htm).
+- LaserDisc (LD): [How to Rip Laserdisc](http://anarchivism.org/w/How_to_Rip_Laserdisc) and [reddit topic](//www.reddit.com/r/LaserDisc/comments/3eqqhq/ripping_laserdiscs).
+- Outdated but interesting:
+  - [Video Workflows: Capture MPEG-2 for DVD](http://www.digitalfaq.com/guides/video/dvd-workflows-mpeg2.htm).
+  - [Good Methods to Create DVDs (Video Workflows)](http://www.digitalfaq.com/guides/video/dvd-workflows.htm).
