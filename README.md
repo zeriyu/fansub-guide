@@ -3,8 +3,21 @@
 - [Fansubbing and Encoding Guides Index](#fansubbing-and-encoding-guides-index)
   - [Fansubbing Overview](#fansubbing-overview)
   - [Capping](#capping)
+    - [Theory](#theory)
+    - [Links](#links)
+      - [Digital TV/Cable/Satellite](#digital-tvcablesatellite)
+      - [Digital Video Disc (DVD)](#digital-video-disc-dvd)
+      - [DVD/Blu-ray Disc (BD)](#dvdblu-ray-disc-bd)
+      - [Webrips](#webrips)
   - [Encoding](#encoding)
+    - [Video Theory (Basic)](#video-theory-basic)
+    - [Video Theory (Complete)](#video-theory-complete)
+    - [Codec and Container Theory](#codec-and-container-theory)
+    - [Luma and Color Theory](#luma-and-color-theory)
+    - [Framerate Theory](#framerate-theory)
+    - [Interlacing Theory](#interlacing-theory)
   - [Muxing and Demuxing](#muxing-and-demuxing)
+    - [Theory](#theory-1)
   - [Filtering](#filtering)
   - [Translating (TL) + Translate Check (TLC)](#translating-tl--translate-check-tlc)
   - [Timing, Fine Timing, Scene Timing, Key Frame Timing (KFT), Karaoke Timing (KT)](#timing-fine-timing-scene-timing-key-frame-timing-kft-karaoke-timing-kt)
@@ -56,68 +69,111 @@ Theory [Anime Fansubbing History](//en.wikipedia.org/wiki/Fansub) and [The State
 
 ## Capping
 
+### Theory
+
 The idea is to obtain the source media.
 
-- The best sources are usually raw Digital Video Disc (DVD) or raw Blu-ray Disc Movie (BDMV) but uploads are not always available.
-- If not, then capping can also mean buying the retail media. Consider buying Anime DVDs/BDs to support the industry. Otherwise, existing VHS/LD/DVD/BD or web rips can be of acceptable quality.
-- For broadcast streams, capping means recording the analog stream and then digitizing it with special hardware or, for internet [simulcasts](//en.wikipedia.org/wiki/Simulcast) (digital), means [stream copying](//ffmpeg.org/ffmpeg.html#Stream-copy) with special software. Sometimes raws can also be obtained from invite-only private trackers. See the &quot;Remux&quot; section for capturing subtitles.
-- __Links__:
-  For Analog TV, 8mm, VHS and LD, see &quot;__Analog Video__&quot;.
-- __Digital TV/Cable/Satellite__: Digital [Signal Processing](http://slideplayer.com/slide/6002959/). Have fun.
-- __Digital Video Disc (DVD)__: [DVD-Decrypter](http://fileforum.betanews.com/detail/DVD-Decrypter/1011845169/1), a [DVD Decrypter Guide](http://www.doom9.org/index.html?/dvddec.htm), [PDF](//yukisubs.files.wordpress.com/2016/10/dvd-decrypter_guide.pdf) and a [second guide](//www.dvd-guides.com/guides/copydvdtodvd/22-how-to-copy-a-dvd-59-using-dvd-decrypter).
-- __DVD/Blu-ray Disc (BD)__: [MakeMKV](//www.makemkv.com), and [Handbrake and MakeMKV Guide](//lifehacker.com/5559007/the-hassle-free-guide-to-ripping-your-blu-ray-collection).
-- For simple stream extraction: [MKVToolNix](//mkvtoolnix.download/downloads.html) + [gMKVExtractGUI](//sourceforge.net/projects/gmkvextractgui), or even just [FFMPEG](//wiki.archlinux.org/index.php/FFmpeg#Subtitles). Also see __Muxing__ section.
-- For general subtitle conversion: [Subtitle Edit](http://www.nikse.dk/subtitleedit) and their [documentation](http://www.nikse.dk/SubtitleEdit/Help).
-- To extract subtitles, please see the __Muxing__ and __Remux__ sections.
-- __Webrips:__
-  - [youtube-dl](//github.com/rg3/youtube-dl), [Graphical User Interface (GUI)](//github.com/MrS0m30n3/youtube-dl-gui). &quot;Industry standard&quot; and supports multiple sites, including Crunchyroll (CR).
-    - Youtube sometimes blocks videos based upon region. To bypass, use this [region checker](//unblockvideos.com/youtube-video-restriction-checker) and a [Virtual Private Network (VPN)](//en.wikipedia.org/wiki/Virtual_private_network) with an exit point in an unblocked region.
-  - [Crunchyroll-XML-Decoder](//github.com/jaw20/crunchy-xml-decoder) + [workaround instructions](//gist.github.com/gdiaz384/ba8dfc45a44f92840aaf2617f802351f) (January 2017). Supports multilingual subtitle only downloads.
-  - Crunchyroll Downloader Toolkit DX, [Mediafire](//www.mediafire.com/file/0jevs7wnhh0x0u6/Crunchyroll+Downloader+Toolkit+DX.zip), [Mega](//mega.nz/#F!wUYwDSgA!8tx_37HUBcs9KqPhkk5FmQ). Windows only. Note: I have not tested this.
-  - [Crunchyroll-Download-Tool](//gitlab.com/RIP/Crunchyroll-Download-Tool) (extension of DX toolkit for bulk downloads). Note: I have not tested this.
-    - Old: [Funimation Downloader](//kametsu.com/topic/39751-program-funicom-dl-funimationcom-downloader). Note: Broken as of ~January 2017 due to Funi site update.
-    - Seiya&#39;s [Funimation-Downloader-nx](//github.com/seiya-dev/funimation-downloader-nx) and [GUI](//github.com/Golumpa/FuniBatchGUI). Note: I have not tested this. Also: related [cat](//yukisubs.files.wordpress.com/2018/02/golumpascat.jpg).
-    - For Netflix, Amazon and Hulu, the only known working non-scene ripping method is screen capture software like [OBS](//obsproject.com), or 100% manual RTMP transport stream rips.
-      - Further reading: [netflix-subtitle-downloader](//greasyfork.org/en/scripts/26654-netflix-subtitle-downloader). Note: I have not tested this.
-- DVD raws, BDMVs, and webrips can also be obtained second hand from other people. See the __Distribute__ section.
+The best sources are usually raw Digital Video Disc (DVD) or raw Blu-ray Disc Movie (BDMV) but uploads are not always available.
+
+If not, then capping can also mean buying the retail media. Consider buying Anime DVDs/BDs to support the industry. Otherwise, existing VHS/LD/DVD/BD or web rips can be of acceptable quality.
+
+For broadcast streams, capping means recording the analog stream and then digitizing it with special hardware or, for internet [simulcasts](//en.wikipedia.org/wiki/Simulcast) (digital), means [stream copying](//ffmpeg.org/ffmpeg.html#Stream-copy) with special software. Sometimes raws can also be obtained from invite-only private trackers. See the &quot;Remux&quot; section for capturing subtitles.
+
+### Links
+
+For Analog TV, 8mm, VHS and LD, see [Analog Video](#analog-capture-guides)
+
+To extract subtitles, please see the [Muxing](#muxing-and-demuxing) and [Remux](#remux) sections.
+
+For general subtitle conversion: [Subtitle Edit](http://www.nikse.dk/subtitleedit) and their [documentation](http://www.nikse.dk/SubtitleEdit/Help).
+
+For simple stream extraction: [MKVToolNix](//mkvtoolnix.download/downloads.html) + [gMKVExtractGUI](//sourceforge.net/projects/gmkvextractgui), or even just [FFMPEG](//wiki.archlinux.org/index.php/FFmpeg#Subtitles). Also see [Muxing](#muxing-and-demuxing) section.
+
+[MakeMKV](//www.makemkv.com), and [Handbrake and MakeMKV Guide](//lifehacker.com/5559007/the-hassle-free-guide-to-ripping-your-blu-ray-collection).
+
+#### Digital TV/Cable/Satellite
+
+Digital [Signal Processing](http://slideplayer.com/slide/6002959/). Have fun.
+
+#### Digital Video Disc (DVD)
+
+[DVD-Decrypter](http://fileforum.betanews.com/detail/DVD-Decrypter/1011845169/1), a [DVD Decrypter Guide](http://www.doom9.org/index.html?/dvddec.htm), [PDF](//yukisubs.files.wordpress.com/2016/10/dvd-decrypter_guide.pdf) and a [second guide](//www.dvd-guides.com/guides/copydvdtodvd/22-how-to-copy-a-dvd-59-using-dvd-decrypter).
+
+#### DVD/Blu-ray Disc (BD)
+
+
+#### Webrips
+
+- [youtube-dl](//github.com/rg3/youtube-dl), [Graphical User Interface (GUI)](//github.com/MrS0m30n3/youtube-dl-gui). &quot;Industry standard&quot; and supports multiple sites, including Crunchyroll (CR).
+  - Youtube sometimes blocks videos based upon region. To bypass, use this [region checker](//unblockvideos.com/youtube-video-restriction-checker) and a [Virtual Private Network (VPN)](//en.wikipedia.org/wiki/Virtual_private_network) with an exit point in an unblocked region.
+- [Crunchyroll-XML-Decoder](//github.com/jaw20/crunchy-xml-decoder) + [workaround instructions](//gist.github.com/gdiaz384/ba8dfc45a44f92840aaf2617f802351f) (January 2017). Supports multilingual subtitle only downloads.
+- Crunchyroll Downloader Toolkit DX, [Mediafire](//www.mediafire.com/file/0jevs7wnhh0x0u6/Crunchyroll+Downloader+Toolkit+DX.zip), [Mega](//mega.nz/#F!wUYwDSgA!8tx_37HUBcs9KqPhkk5FmQ). Windows only. Note: I have not tested this.
+- [Crunchyroll-Download-Tool](//gitlab.com/RIP/Crunchyroll-Download-Tool) (extension of DX toolkit for bulk downloads). Note: I have not tested this.
+  - Old: [Funimation Downloader](//kametsu.com/topic/39751-program-funicom-dl-funimationcom-downloader). Note: Broken as of ~January 2017 due to Funi site update.
+  - Seiya&#39;s [Funimation-Downloader-nx](//github.com/seiya-dev/funimation-downloader-nx) and [GUI](//github.com/Golumpa/FuniBatchGUI). Note: I have not tested this. Also: related [cat](//yukisubs.files.wordpress.com/2018/02/golumpascat.jpg).
+  - For Netflix, Amazon and Hulu, the only known working non-scene ripping method is screen capture software like [OBS](//obsproject.com), or 100% manual RTMP transport stream rips.
+    - Further reading: [netflix-subtitle-downloader](//greasyfork.org/en/scripts/26654-netflix-subtitle-downloader). Note: I have not tested this.
+
+DVD raws, BDMVs, and webrips can also be obtained second hand from other people. See the [Distribute](#distribute-distro) section.
 
 ## Encoding
 
-- __Video Theory (Basic)__: Video can be described as a series of pictures shown quickly in succession.
-- The most basic reasons to encode video are to preserve complex changes (such as any filtering) and to make the video stream smaller. Even a minute of raw uncompressed video is several GigaBytes (GB) in size. The basic idea is to reduce the file size to subjective &quot;acceptable&quot; levels while retaining the highest quality possible.
-- Motion Picture Engineering Group (MPEG) video encoding works by compressing one picture (known as a &quot;key frame&quot;) and then recording any changes between that frame and the next frame. And then recording the changes between that second frame and the frame after and so forth. To display any given frame, every frame before it must be decoded starting from the nearest previous key frame.
-- __Video Theory (Complete)__: Following encoding guides without understanding the theory is just asking for trouble, but, with so much background necessary, there is just not a good place to starting learning about video encoding. This one is close: __[A&E&#39;s Technical Guides to All Things Audio and Video (v3)](//www.animemusicvideos.org/guides/avtech31)__, [PDF](//yukisubs.files.wordpress.com/2016/10/aandes_technical_guides_to_all_things_audio_and_video.pdf). Read this in its entirety. __No excuses__. A&E&#39;s guide is dated but very good for theory. More modern workflow guides are found further below.
-- __Codec and Container Theory__:
-  - Watch this video: [How Codecs Work - Tutorial](//vimeo.com/104554788) __All of it!__.
-  - Container VS Codec: [Media Formats](//www.dr-lex.be/info-stuff/mediaformats.html) and [How to Choose the Right Codec](//www.videomaker.com/article/c03/18165-how-to-choose-the-right-codec-and-container-for-your-video-workflow) and [read this discussion](//collectr.blogspot.com/2011/08/encoding-wars-return-of-revenge-of.html).
-  - Wikipedia (Wiki): [Codec Comparison](//en.wikipedia.org/wiki/Comparison_of_video_codecs), [Container Comparison](//en.wikipedia.org/wiki/Comparison_of_video_container_formats), [MPEG standards](//en.wikipedia.org/wiki/Moving_Picture_Experts_Group).
-  - HEVC Review [1](//forums.bakabt.me/index.php?topic=45462.0), [2](//x265.ru/en/bolshoe-sravnenie-kodekov-h265-ot-mgu), [PDF](//yukisubs.files.wordpress.com/2016/10/msu_hevc_comparison_2015_free.pdf) and [3](//blogs.gnome.org/rbultje/2015/09/28/vp9-encodingdecoding-performance-vs-hevch-264).
-    - Interesting related [blog post](http://archimago.blogspot.com/2016/12/musings-end-of-2016-video-encoding-hevc.html).
-  - For reference: [Video Codecs by FOURCC](https://www.fourcc.org/codecs.php) and [related summary](//docs.microsoft.com/en-us/windows/desktop/medfound/video-fourccs).
-- __Luma and Color Theory__:
-  - Human [Color Perception](//www.cambridgeincolour.com/tutorials/color-perception.htm) and [related quirks](//www.cambridgeincolour.com/tutorials/cameras-vs-human-eye.htm).
-  - Adobe Video Road blog: [Understanding Color](//blogs.adobe.com/VideoRoad/2010/06/understanding_color_processing.html), [What is YUV](//blogs.adobe.com/VideoRoad/2010/06/what_is_yuv.html), [Color Subsampling](//blogs.adobe.com/VideoRoad/2010/06/color_subsampling_or_what_is_4.html).
-    - [8-bit vs 16-bit](//www.diyphotography.net/8-bit-vs-16-bit-color-depth-use-matters).
-    - [Bit Depth Tutorial](//www.cambridgeincolour.com/tutorials/bit-depth.htm).
-    - [Doki - Discussion: 10-bit h264](//doki.co/2011/07/19/discussion-10-bit-h264) or here are the linked PDFs: [10-bit AVC Broadcasting](//yukisubs.files.wordpress.com/2016/10/using_10-bit_avc-h-264_encoding_with_422_for_broadcast_contribution_-_pierre_larbier.pdf), [Why 10-bit Saves Bandwidth](//yukisubs.files.wordpress.com/2016/10/why_does_10bit_save_bandwidth_-_ateme.pdf), [10-bit Presentation](//yukisubs.files.wordpress.com/2016/10/10-bit_pristine_video_quality_presentation_-_ateme.pdf).
-    - Interesting related [blog post](http://archimago.blogspot.com/2016/12/quick-compare-avc-vs-hevc-8-bit-vs-10.html).
-    - [Understanding Histograms](//www.cambridgeincolour.com/tutorials/histograms1.htm), [Part 2](//www.cambridgeincolour.com/tutorials/histograms2.htm) and an [example](//yukisubs.files.wordpress.com/2018/06/beluga.jpg).
-    - Understanding [White Balance](//www.cambridgeincolour.com/tutorials/white-balance.htm).
-    - [Dynamic Range](//www.cambridgeincolour.com/tutorials/dynamic-range.htm).
-    - Interesting case studies:
-    - Wiki: [Color space](//en.wikipedia.org/wiki/Color_space), [Rec601](//en.wikipedia.org/wiki/Rec._601) and [Rec709](//en.wikipedia.org/wiki/Rec._709).
-    - [NTSC vs PAL color primaries](//video.stackexchange.com/questions/16840/ffmpeg-explicitly-tag-h-264-as-bt-601-rather-than-leaving-unspecified).
-    - Example of [YCbCr color componet data ranges](http://discoverybiz.net/enu0/faq/faq_YUVDataRangeByBreeze.html).
-    - Information on different [YUV sub-sampling patterns](http://discoverybiz.net/enu0/faq/faq_YUVSubSampleByBreeze.html).
-    - PSNR comparison of different YUV sub-sampling patterns when performing color family conversions: [Quality of RGB-YUV-RGB conversion](http://discoverybiz.net/enu0/faq/faq_YUVbyBreeze_test_00.html).
-- __Framerate Theory__:
-  - [How many frames can humans see?](https://www.100fps.com/how_many_frames_can_humans_see.htm), [PDF](//yukisubs.files.wordpress.com/2016/11/how_many_fps_can_the_human_eye_see.pdf).
-    - The frames per second (FPS) theory guide also covers &quot;smoothness&quot; by blurring and luma sensitivity.
-      - [Understanding FFMPEG&#39;s Group of Pictures (GOP) Options](//esoterictek.blogspot.com/2017/04/understanding-ffmpegs-group-of-pictures.html).
-  - Variable Frame Rate: [VFR for Fansub Encoders](//forums.animesuki.com/showthread.php?t=34738), [PDF](//yukisubs.files.wordpress.com/2016/10/vfr_for_fansub_encoders.pdf)
-  - AviSynth&#39;s [Working with VFR](http://avisynth.nl/index.php/VFR) guide and [VFRaC Workarounds](//mod16.org/hurfdurf/?p=7).
-  - FPS theory sandbox: [frames-per-second.appspot.com](//frames-per-second.appspot.com).
-- __Interlacing Theory__:
+### Video Theory (Basic)
+
+Video can be described as a series of pictures shown quickly in succession.
+
+The most basic reasons to encode video are to preserve complex changes (such as any filtering) and to make the video stream smaller. Even a minute of raw uncompressed video is several GigaBytes (GB) in size. The basic idea is to reduce the file size to subjective &quot;acceptable&quot; levels while retaining the highest quality possible.
+
+Motion Picture Engineering Group (MPEG) video encoding works by compressing one picture (known as a &quot;key frame&quot;) and then recording any changes between that frame and the next frame. And then recording the changes between that second frame and the frame after and so forth. To display any given frame, every frame before it must be decoded starting from the nearest previous key frame.
+
+### Video Theory (Complete)
+
+Following encoding guides without understanding the theory is just asking for trouble, but, with so much background necessary, there is just not a good place to starting learning about video encoding.
+This one is close: __[A&E&#39;s Technical Guides to All Things Audio and Video (v3)](//www.animemusicvideos.org/guides/avtech31)__, [PDF](//yukisubs.files.wordpress.com/2016/10/aandes_technical_guides_to_all_things_audio_and_video.pdf).
+Read this in its entirety.
+
+__No excuses__.
+
+ A&E&#39;s guide is dated but very good for theory. More modern workflow guides are found further below.
+
+### Codec and Container Theory
+
+- Watch this video: [How Codecs Work - Tutorial](//vimeo.com/104554788) __All of it!__.
+- Container VS Codec: [Media Formats](//www.dr-lex.be/info-stuff/mediaformats.html) and [How to Choose the Right Codec](//www.videomaker.com/article/c03/18165-how-to-choose-the-right-codec-and-container-for-your-video-workflow) and [read this discussion](//collectr.blogspot.com/2011/08/encoding-wars-return-of-revenge-of.html).
+- Wikipedia (Wiki): [Codec Comparison](//en.wikipedia.org/wiki/Comparison_of_video_codecs), [Container Comparison](//en.wikipedia.org/wiki/Comparison_of_video_container_formats), [MPEG standards](//en.wikipedia.org/wiki/Moving_Picture_Experts_Group).
+- HEVC Review [1](//forums.bakabt.me/index.php?topic=45462.0), [2](//x265.ru/en/bolshoe-sravnenie-kodekov-h265-ot-mgu), [PDF](//yukisubs.files.wordpress.com/2016/10/msu_hevc_comparison_2015_free.pdf) and [3](//blogs.gnome.org/rbultje/2015/09/28/vp9-encodingdecoding-performance-vs-hevch-264).
+  - Interesting related [blog post](http://archimago.blogspot.com/2016/12/musings-end-of-2016-video-encoding-hevc.html).
+- For reference: [Video Codecs by FOURCC](https://www.fourcc.org/codecs.php) and [related summary](//docs.microsoft.com/en-us/windows/desktop/medfound/video-fourccs).
+
+### Luma and Color Theory
+
+- Human [Color Perception](//www.cambridgeincolour.com/tutorials/color-perception.htm) and [related quirks](//www.cambridgeincolour.com/tutorials/cameras-vs-human-eye.htm).
+- Adobe Video Road blog: [Understanding Color](//blogs.adobe.com/VideoRoad/2010/06/understanding_color_processing.html), [What is YUV](//blogs.adobe.com/VideoRoad/2010/06/what_is_yuv.html), [Color Subsampling](//blogs.adobe.com/VideoRoad/2010/06/color_subsampling_or_what_is_4.html).
+  - [8-bit vs 16-bit](//www.diyphotography.net/8-bit-vs-16-bit-color-depth-use-matters).
+  - [Bit Depth Tutorial](//www.cambridgeincolour.com/tutorials/bit-depth.htm).
+  - [Doki - Discussion: 10-bit h264](//doki.co/2011/07/19/discussion-10-bit-h264) or here are the linked PDFs: [10-bit AVC Broadcasting](//yukisubs.files.wordpress.com/2016/10/using_10-bit_avc-h-264_encoding_with_422_for_broadcast_contribution_-_pierre_larbier.pdf), [Why 10-bit Saves Bandwidth](//yukisubs.files.wordpress.com/2016/10/why_does_10bit_save_bandwidth_-_ateme.pdf), [10-bit Presentation](//yukisubs.files.wordpress.com/2016/10/10-bit_pristine_video_quality_presentation_-_ateme.pdf).
+  - Interesting related [blog post](http://archimago.blogspot.com/2016/12/quick-compare-avc-vs-hevc-8-bit-vs-10.html).
+  - [Understanding Histograms](//www.cambridgeincolour.com/tutorials/histograms1.htm), [Part 2](//www.cambridgeincolour.com/tutorials/histograms2.htm) and an [example](//yukisubs.files.wordpress.com/2018/06/beluga.jpg).
+  - Understanding [White Balance](//www.cambridgeincolour.com/tutorials/white-balance.htm).
+  - [Dynamic Range](//www.cambridgeincolour.com/tutorials/dynamic-range.htm).
+  - Interesting case studies:
+  - Wiki: [Color space](//en.wikipedia.org/wiki/Color_space), [Rec601](//en.wikipedia.org/wiki/Rec._601) and [Rec709](//en.wikipedia.org/wiki/Rec._709).
+  - [NTSC vs PAL color primaries](//video.stackexchange.com/questions/16840/ffmpeg-explicitly-tag-h-264-as-bt-601-rather-than-leaving-unspecified).
+  - Example of [YCbCr color componet data ranges](http://discoverybiz.net/enu0/faq/faq_YUVDataRangeByBreeze.html).
+  - Information on different [YUV sub-sampling patterns](http://discoverybiz.net/enu0/faq/faq_YUVSubSampleByBreeze.html).
+  - PSNR comparison of different YUV sub-sampling patterns when performing color family conversions: [Quality of RGB-YUV-RGB conversion](http://discoverybiz.net/enu0/faq/faq_YUVbyBreeze_test_00.html).
+  
+### Framerate Theory
+
+- [How many frames can humans see?](https://www.100fps.com/how_many_frames_can_humans_see.htm), [PDF](//yukisubs.files.wordpress.com/2016/11/how_many_fps_can_the_human_eye_see.pdf).
+  - The frames per second (FPS) theory guide also covers &quot;smoothness&quot; by blurring and luma sensitivity.
+    - [Understanding FFMPEG&#39;s Group of Pictures (GOP) Options](//esoterictek.blogspot.com/2017/04/understanding-ffmpegs-group-of-pictures.html).
+- Variable Frame Rate: [VFR for Fansub Encoders](//forums.animesuki.com/showthread.php?t=34738), [PDF](//yukisubs.files.wordpress.com/2016/10/vfr_for_fansub_encoders.pdf)
+- AviSynth&#39;s [Working with VFR](http://avisynth.nl/index.php/VFR) guide and [VFRaC Workarounds](//mod16.org/hurfdurf/?p=7).
+- FPS theory sandbox: [frames-per-second.appspot.com](//frames-per-second.appspot.com).
+
+### Interlacing Theory
+
   - Some random [CRT, NTSC, and Interlacing History](http://foro.doom9.org/video-basics.htm).
   - Everything you never wanted to know about [interlacing](https://www.100fps.com), [PDF](//yukisubs.files.wordpress.com/2016/11/what_is_deinterlacing_the_best_method_to_deinterlace_movies.pdf).
     - [The Nature of Interlaced TV, Film-to-Video Conversion, and Other Interesting Gambits](//hometheaterhifi.com/volume_7_4/dvd-benchmark-part-5-progressive-10-2000.html).
@@ -212,9 +268,13 @@ The idea is to obtain the source media.
 
 ## Muxing and Demuxing
 
-- __Theory__: For muxing, the idea is to take multiple discrete files (video, audio, subtitles, fonts) and merge them together into a single file for playback. For demuxing, the idea is to take one file that contains multiple streams and extract out at least one of them.
-- Muxing typically means shortening, lengthening or delaying streams for syncing. Shortening and delaying are compatible with stream copying techniques. However, any lengthening or modifications done mid-stream will typically require transcoding the entire stream. Thus, the two tasks (encoding and muxing) overlap somewhat.
-- Demuxing is usually necessary to obtain sources to work from and can be thought of as part of Capping.
+### Theory
+
+For muxing, the idea is to take multiple discrete files (video, audio, subtitles, fonts) and merge them together into a single file for playback. For demuxing, the idea is to take one file that contains multiple streams and extract out at least one of them.
+
+Muxing typically means shortening, lengthening or delaying streams for syncing. Shortening and delaying are compatible with stream copying techniques. However, any lengthening or modifications done mid-stream will typically require transcoding the entire stream. Thus, the two tasks (encoding and muxing) overlap somewhat.
+
+Demuxing is usually necessary to obtain sources to work from and can be thought of as part of Capping.
 - The typical containers used are either [Matroska](//www.matroska.org/technical/whatis/index.html) (.mkv) with softsubs, fonts and possibly multiple audio streams, or standard MPEG-4 (.mp4) containers with hardsubs and a single audio stream.
 - __Muxing tools__:
 - FFMPEG:
