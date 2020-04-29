@@ -50,8 +50,10 @@
   - [Timing, Fine Timing, Scene Timing, Key Frame Timing (KFT), Karaoke Timing (KT)](#timing-fine-timing-scene-timing-key-frame-timing-kft-karaoke-timing-kt)
   - [Editing + Quality Check (QC)](#editing--quality-check-qc)
   - [Typesetting](#typesetting)
-    - [Styling](#styling)
-    - [Typeset](#typeset)
+    - [Styling Theory](#styling-theory)
+    - [Styling Links](#styling-links)
+    - [Typesetting Theory](#typesetting-theory)
+    - [Typesetting Links](#typesetting-links)
     - [Karaoke Effects (KFX)](#karaoke-effects-kfx)
       - [Prerequisite reading](#prerequisite-reading)
       - [Working with templates](#working-with-templates)
@@ -76,7 +78,7 @@
     - [Subtitle Preprocessing Tools](#subtitle-preprocessing-tools)
     - [Workflow](#workflow)
   - [In Service of Chaos: Analog](#in-service-of-chaos-analog)
-    - [Analog Video Broadcasting History__: (fascinating btw)](#analog-video-broadcasting-history-fascinating-btw)
+    - [Analog Video Broadcasting History (fascinating btw)](#analog-video-broadcasting-history-fascinating-btw)
     - [Analog Decoding and Artifacting](#analog-decoding-and-artifacting)
     - [Consumer Media Overview and Resources](#consumer-media-overview-and-resources)
     - [Analog Capture Guides](#analog-capture-guides)
@@ -578,9 +580,8 @@ The idea is to get playback without having to transcode the video.
 
 ## Typesetting
 
-### Styling
+### Styling Theory
 
-Check out **Underwater's Styling Guide** [[PDF](pdf/styling-guide-underwater.pdf)].
 In summary:
 
   1. Use white as the primary color.
@@ -588,14 +589,20 @@ In summary:
   3. Use a readable font, like Arial or [Roboto](//fonts.google.com/specimen/Roboto), in bold.
   4. Make it large enough to see without squinting.
 
-### Typeset
+### Styling Links
 
-Theory: Typesetting is mostly making sure the subtitle dialogue is visually legible and signs look like they are natively part of the video. Typesetting can also extend to styling the opening, ending and insert songs, including fancy karaoke.
+Check out **Underwater's Styling Guide** [[PDF](pdf/styling-guide-underwater.pdf)].
+
+### Typesetting Theory
+
+Typesetting is mostly making sure the subtitle dialogue is visually legible and signs look like they are natively part of the video. Typesetting can also extend to styling the opening, ending and insert songs, including fancy karaoke.
 
 [More theory](//collectr.blogspot.com/search/label/typesetting).
 The most important part of typesetting is also the simplest: make sure the dialogue is readable.
 
 While Typesetting is actually quite strait-forward, doing it efficiently and well is something else entirely.
+
+### Typesetting Links
 
 - unanimated&#39;s [Guide to Typesetting in Aegisub](http://unanimated.xtreemhost.com/ts/index.htm), [RAR](//www.mediafire.com/file/t3zkwtzc1t33tpg/TypesettingGuide2015-03-25.rar), [RAR mirror](//mega.nz/#F!wUYwDSgA!8tx_37HUBcs9KqPhkk5FmQ), [PDF](//yukisubs.files.wordpress.com/2016/10/typesetting_in_aegisub_-_unanimated_-_20oct16.pdf).
 - unanimated&#39;s [Aegisub scripts](http://unanimated.xtreemhost.com/ts/scripts-unanimated.htm), [PDF](//yukisubs.files.wordpress.com/2016/10/unanimated_aegisub_scripts.pdf) and [Typesetting Tools](//github.com/TypesettingTools). iamevn&#39;s [mirror](//github.com/iamevn/unanimated-Aegisub-Scripts).
@@ -856,7 +863,7 @@ Remuxers typically focus on improving work done by other groups, combining work 
 
 Digital is an exercise in precision, while analog was an exercise in controlled chaos.&quot; -[digitalfaq.com](http://www.digitalfaq.com/guides/video/capture-understand-sources.htm), [Forums](http://www.digitalfaq.com/forum).
 
-### Analog Video Broadcasting History__: (fascinating btw)
+### Analog Video Broadcasting History (fascinating btw)
 
 - Presentation slides on [Analog Communication Systems](http://slideplayer.com/slide/3990945/).
 - YouTube videos:
