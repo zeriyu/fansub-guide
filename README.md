@@ -3,7 +3,7 @@
 - [Fansubbing and Encoding Guides Index](#fansubbing-and-encoding-guides-index)
   - [Fansubbing Overview](#fansubbing-overview)
   - [Capping](#capping)
-    - [Theory](#theory)
+    - [Capping Theory](#capping-theory)
     - [Links](#links)
       - [Digital TV/Cable/Satellite](#digital-tvcablesatellite)
       - [Digital Video Disc (DVD)](#digital-video-disc-dvd)
@@ -16,9 +16,36 @@
     - [Luma and Color Theory](#luma-and-color-theory)
     - [Framerate Theory](#framerate-theory)
     - [Interlacing Theory](#interlacing-theory)
+    - [Codec Bit Allocation Theory](#codec-bit-allocation-theory)
+    - [Resolution Theory and Standards](#resolution-theory-and-standards)
+    - [Audio Theory](#audio-theory)
+    - [Encoding and Release Standards](#encoding-and-release-standards)
+    - [Concrete Guides (completely random)](#concrete-guides-completely-random)
+    - [Specific Software](#specific-software)
+      - [FFMPEG](#ffmpeg)
+      - [x264/x265](#x264x265)
+    - [Audio Encoding](#audio-encoding)
+    - [QC (?)](#qc)
+  - [Playback](#playback)
+    - [Computer](#computer)
+    - [HTPC](#htpc)
   - [Muxing and Demuxing](#muxing-and-demuxing)
-    - [Theory](#theory-1)
+    - [Muxing and Demuxing Theory](#muxing-and-demuxing-theory)
+    - [Muxing tools](#muxing-tools)
   - [Filtering](#filtering)
+    - [Preface](#preface)
+    - [Filtering Theory](#filtering-theory)
+    - [Examples](#examples)
+    - [Understanding and Identifying Artifacts](#understanding-and-identifying-artifacts)
+    - [Frameworks](#frameworks)
+      - [AviSynth](#avisynth)
+      - [VapourSynth](#vapoursynth)
+      - [Additional programs used](#additional-programs-used)
+      - [Further reading](#further-reading)
+    - [Scene Filtering](#scene-filtering)
+    - [Working with Groups of Pictures (GOPs)](#working-with-groups-of-pictures-gops)
+    - [Masktools](#masktools)
+    - [Real-time filtering](#real-time-filtering)
   - [Translating (TL) + Translate Check (TLC)](#translating-tl--translate-check-tlc)
   - [Timing, Fine Timing, Scene Timing, Key Frame Timing (KFT), Karaoke Timing (KT)](#timing-fine-timing-scene-timing-key-frame-timing-kft-karaoke-timing-kt)
   - [Editing + Quality Check (QC)](#editing--quality-check-qc)
@@ -69,7 +96,7 @@ Theory [Anime Fansubbing History](//en.wikipedia.org/wiki/Fansub) and [The State
 
 ## Capping
 
-### Theory
+### Capping Theory
 
 The idea is to obtain the source media.
 
@@ -89,8 +116,6 @@ For general subtitle conversion: [Subtitle Edit](http://www.nikse.dk/subtitleedi
 
 For simple stream extraction: [MKVToolNix](//mkvtoolnix.download/downloads.html) + [gMKVExtractGUI](//sourceforge.net/projects/gmkvextractgui), or even just [FFMPEG](//wiki.archlinux.org/index.php/FFmpeg#Subtitles). Also see [Muxing](#muxing-and-demuxing) section.
 
-[MakeMKV](//www.makemkv.com), and [Handbrake and MakeMKV Guide](//lifehacker.com/5559007/the-hassle-free-guide-to-ripping-your-blu-ray-collection).
-
 #### Digital TV/Cable/Satellite
 
 Digital [Signal Processing](http://slideplayer.com/slide/6002959/). Have fun.
@@ -101,6 +126,7 @@ Digital [Signal Processing](http://slideplayer.com/slide/6002959/). Have fun.
 
 #### DVD/Blu-ray Disc (BD)
 
+[MakeMKV](//www.makemkv.com), and [Handbrake and MakeMKV Guide](//lifehacker.com/5559007/the-hassle-free-guide-to-ripping-your-blu-ray-collection).
 
 #### Webrips
 
@@ -132,7 +158,7 @@ Following encoding guides without understanding the theory is just asking for tr
 This one is close: __[A&E&#39;s Technical Guides to All Things Audio and Video (v3)](//www.animemusicvideos.org/guides/avtech31)__, [PDF](//yukisubs.files.wordpress.com/2016/10/aandes_technical_guides_to_all_things_audio_and_video.pdf).
 Read this in its entirety.
 
-__No excuses__.
+**No excuses.**
 
  A&E&#39;s guide is dated but very good for theory. More modern workflow guides are found further below.
 
@@ -149,53 +175,65 @@ __No excuses__.
 
 - Human [Color Perception](//www.cambridgeincolour.com/tutorials/color-perception.htm) and [related quirks](//www.cambridgeincolour.com/tutorials/cameras-vs-human-eye.htm).
 - Adobe Video Road blog: [Understanding Color](//blogs.adobe.com/VideoRoad/2010/06/understanding_color_processing.html), [What is YUV](//blogs.adobe.com/VideoRoad/2010/06/what_is_yuv.html), [Color Subsampling](//blogs.adobe.com/VideoRoad/2010/06/color_subsampling_or_what_is_4.html).
-  - [8-bit vs 16-bit](//www.diyphotography.net/8-bit-vs-16-bit-color-depth-use-matters).
-  - [Bit Depth Tutorial](//www.cambridgeincolour.com/tutorials/bit-depth.htm).
-  - [Doki - Discussion: 10-bit h264](//doki.co/2011/07/19/discussion-10-bit-h264) or here are the linked PDFs: [10-bit AVC Broadcasting](//yukisubs.files.wordpress.com/2016/10/using_10-bit_avc-h-264_encoding_with_422_for_broadcast_contribution_-_pierre_larbier.pdf), [Why 10-bit Saves Bandwidth](//yukisubs.files.wordpress.com/2016/10/why_does_10bit_save_bandwidth_-_ateme.pdf), [10-bit Presentation](//yukisubs.files.wordpress.com/2016/10/10-bit_pristine_video_quality_presentation_-_ateme.pdf).
-  - Interesting related [blog post](http://archimago.blogspot.com/2016/12/quick-compare-avc-vs-hevc-8-bit-vs-10.html).
-  - [Understanding Histograms](//www.cambridgeincolour.com/tutorials/histograms1.htm), [Part 2](//www.cambridgeincolour.com/tutorials/histograms2.htm) and an [example](//yukisubs.files.wordpress.com/2018/06/beluga.jpg).
-  - Understanding [White Balance](//www.cambridgeincolour.com/tutorials/white-balance.htm).
-  - [Dynamic Range](//www.cambridgeincolour.com/tutorials/dynamic-range.htm).
-  - Interesting case studies:
-  - Wiki: [Color space](//en.wikipedia.org/wiki/Color_space), [Rec601](//en.wikipedia.org/wiki/Rec._601) and [Rec709](//en.wikipedia.org/wiki/Rec._709).
-  - [NTSC vs PAL color primaries](//video.stackexchange.com/questions/16840/ffmpeg-explicitly-tag-h-264-as-bt-601-rather-than-leaving-unspecified).
-  - Example of [YCbCr color componet data ranges](http://discoverybiz.net/enu0/faq/faq_YUVDataRangeByBreeze.html).
-  - Information on different [YUV sub-sampling patterns](http://discoverybiz.net/enu0/faq/faq_YUVSubSampleByBreeze.html).
-  - PSNR comparison of different YUV sub-sampling patterns when performing color family conversions: [Quality of RGB-YUV-RGB conversion](http://discoverybiz.net/enu0/faq/faq_YUVbyBreeze_test_00.html).
+- [8-bit vs 16-bit](//www.diyphotography.net/8-bit-vs-16-bit-color-depth-use-matters).
+- [Bit Depth Tutorial](//www.cambridgeincolour.com/tutorials/bit-depth.htm).
+- [Doki - Discussion: 10-bit h264](//doki.co/2011/07/19/discussion-10-bit-h264) or here are the linked PDFs: [10-bit AVC Broadcasting](//yukisubs.files.wordpress.com/2016/10/using_10-bit_avc-h-264_encoding_with_422_for_broadcast_contribution_-_pierre_larbier.pdf), [Why 10-bit Saves Bandwidth](//yukisubs.files.wordpress.com/2016/10/why_does_10bit_save_bandwidth_-_ateme.pdf), [10-bit Presentation](//yukisubs.files.wordpress.com/2016/10/10-bit_pristine_video_quality_presentation_-_ateme.pdf).
+- Interesting related [blog post](http://archimago.blogspot.com/2016/12/quick-compare-avc-vs-hevc-8-bit-vs-10.html).
+- [Understanding Histograms](//www.cambridgeincolour.com/tutorials/histograms1.htm), [Part 2](//www.cambridgeincolour.com/tutorials/histograms2.htm) and an [example](//yukisubs.files.wordpress.com/2018/06/beluga.jpg).
+- Understanding [White Balance](//www.cambridgeincolour.com/tutorials/white-balance.htm).
+- [Dynamic Range](//www.cambridgeincolour.com/tutorials/dynamic-range.htm).
+- Interesting case studies:
+- Wiki: [Color space](//en.wikipedia.org/wiki/Color_space), [Rec601](//en.wikipedia.org/wiki/Rec._601) and [Rec709](//en.wikipedia.org/wiki/Rec._709).
+- [NTSC vs PAL color primaries](//video.stackexchange.com/questions/16840/ffmpeg-explicitly-tag-h-264-as-bt-601-rather-than-leaving-unspecified).
+- Example of [YCbCr color componet data ranges](http://discoverybiz.net/enu0/faq/faq_YUVDataRangeByBreeze.html).
+- Information on different [YUV sub-sampling patterns](http://discoverybiz.net/enu0/faq/faq_YUVSubSampleByBreeze.html).
+- PSNR comparison of different YUV sub-sampling patterns when performing color family conversions: [Quality of RGB-YUV-RGB conversion](http://discoverybiz.net/enu0/faq/faq_YUVbyBreeze_test_00.html).
   
 ### Framerate Theory
 
 - [How many frames can humans see?](https://www.100fps.com/how_many_frames_can_humans_see.htm), [PDF](//yukisubs.files.wordpress.com/2016/11/how_many_fps_can_the_human_eye_see.pdf).
-  - The frames per second (FPS) theory guide also covers &quot;smoothness&quot; by blurring and luma sensitivity.
-    - [Understanding FFMPEG&#39;s Group of Pictures (GOP) Options](//esoterictek.blogspot.com/2017/04/understanding-ffmpegs-group-of-pictures.html).
+- The frames per second (FPS) theory guide also covers &quot;smoothness&quot; by blurring and luma sensitivity.
+  - [Understanding FFMPEG&#39;s Group of Pictures (GOP) Options](//esoterictek.blogspot.com/2017/04/understanding-ffmpegs-group-of-pictures.html).
 - Variable Frame Rate: [VFR for Fansub Encoders](//forums.animesuki.com/showthread.php?t=34738), [PDF](//yukisubs.files.wordpress.com/2016/10/vfr_for_fansub_encoders.pdf)
 - AviSynth&#39;s [Working with VFR](http://avisynth.nl/index.php/VFR) guide and [VFRaC Workarounds](//mod16.org/hurfdurf/?p=7).
 - FPS theory sandbox: [frames-per-second.appspot.com](//frames-per-second.appspot.com).
 
 ### Interlacing Theory
 
-  - Some random [CRT, NTSC, and Interlacing History](http://foro.doom9.org/video-basics.htm).
-  - Everything you never wanted to know about [interlacing](https://www.100fps.com), [PDF](//yukisubs.files.wordpress.com/2016/11/what_is_deinterlacing_the_best_method_to_deinterlace_movies.pdf).
-    - [The Nature of Interlaced TV, Film-to-Video Conversion, and Other Interesting Gambits](//hometheaterhifi.com/volume_7_4/dvd-benchmark-part-5-progressive-10-2000.html).
-- __Codec Bit Allocation Theory__:
-  - [Understanding Rate Control Modes (x264, x265)](http://slhck.info/video/2017/03/01/rate-control.html), [PDF](//yukisubs.files.wordpress.com/2017/04/understanding_rate_control_modes_x264_x265.pdf).
-  - [CRF Guide (Constant Rate Factor in x264 and x265)](http://slhck.info/video/2017/02/24/crf-guide.html), [PDF](//yukisubs.files.wordpress.com/2017/04/crf_guide_constant_rate_factor_in_x264_and_x265.pdf).
-  - For understanding x264 resolution and bitrate relationships see [this guide](http://www.lighterra.com/papers/videoencodingh264). This also covers x264 settings.
-- __Resolution Theory and Standards__:
-  - [Native Resolutions and Scaling](//kageru.moe/blog/article/resolutions) and [automation script](https://github.com/Infiziert90/getnative).
-  - Questionable links on resolution standards: [random article](https://www.bestusbpoweredmonitor.com/2017/08/16/720p-vs-1080p-vs-1440p-vs-4k-vs-8k/) and [another one](https://www.lifewire.com/720p-vs-1080p-a-comparison-1847332).
-  - Blog with native resolutions for [various shows](//anibin.blogspot.com/2017/07/blog-post.html).
-  - [Scaling Theory and Algorithms](//www.cambridgeincolour.com/tutorials/image-interpolation.htm), [Part 2](//www.cambridgeincolour.com/tutorials/image-resize-for-web.htm).
-  - 2018Jan status update on techniques for [upscaling consumer media to 4k](https://freetime.mikeconnelly.com/archives/1206).
-- __Audio Theory__:
-  - [Audio Frequency and Loudness: Part I - An Introduction to the Basics](https://hometheaterhifi.com/technical/technical-reviews/audio-frequency-loudness-part-introduction-basics/).
-  - [Real Sounds and Frequency Composition: Part II](https://hometheaterhifi.com/technical/technical-reviews/real-sounds-frequency-composition-part-ii).
-- __Encoding and Release Standards__: These exist to ensure client hardware decoding compatibility. Please note that compatibility is not emphasized in the Anime community.
-  - Apple&#39;s [General Authoring Requirements](//developer.apple.com/library/content/documentation/General/Reference/HLSAuthoringSpec/Requirements.html#//apple_ref/doc/uid/TP40016596-CH2-SW1).
-  - Youtube&#39;s [Recommended upload encoding settings](//support.google.com/youtube/answer/1722171?hl=en).
-  - &quot;Scene&quot; [release standards](//scenerules.org) for [Anime](//scenerules.org/n.html?id=2014_X264-ANIME.nfo), [x264](//scenerules.org/n.html?id=2011_X264.2.nfo), [DVDrips](//scenerules.org/n.html?id=2011_DVDR.nfo), [BDrips](//scenerules.org/n.html?id=2010_BDr.nfo).
-  - Microsoft&#39;s [Video Media Types](//docs.microsoft.com/en-us/windows/desktop/medfound/video-media-types) and [supported formats](//docs.microsoft.com/en-us/windows/desktop/medfound/supported-media-formats-in-media-foundation).
-- __Concrete Guides (completely random)__:
+- Some random [CRT, NTSC, and Interlacing History](http://foro.doom9.org/video-basics.htm).
+- Everything you never wanted to know about [interlacing](https://www.100fps.com), [PDF](//yukisubs.files.wordpress.com/2016/11/what_is_deinterlacing_the_best_method_to_deinterlace_movies.pdf).
+  - [The Nature of Interlaced TV, Film-to-Video Conversion, and Other Interesting Gambits](//hometheaterhifi.com/volume_7_4/dvd-benchmark-part-5-progressive-10-2000.html).
+
+### Codec Bit Allocation Theory
+
+- [Understanding Rate Control Modes (x264, x265)](http://slhck.info/video/2017/03/01/rate-control.html), [PDF](//yukisubs.files.wordpress.com/2017/04/understanding_rate_control_modes_x264_x265.pdf).
+- [CRF Guide (Constant Rate Factor in x264 and x265)](http://slhck.info/video/2017/02/24/crf-guide.html), [PDF](//yukisubs.files.wordpress.com/2017/04/crf_guide_constant_rate_factor_in_x264_and_x265.pdf).
+- For understanding x264 resolution and bitrate relationships see [this guide](http://www.lighterra.com/papers/videoencodingh264). This also covers x264 settings.
+
+### Resolution Theory and Standards
+
+- [Native Resolutions and Scaling](//kageru.moe/blog/article/resolutions) and [automation script](https://github.com/Infiziert90/getnative).
+- Questionable links on resolution standards: [random article](https://www.bestusbpoweredmonitor.com/2017/08/16/720p-vs-1080p-vs-1440p-vs-4k-vs-8k/) and [another one](https://www.lifewire.com/720p-vs-1080p-a-comparison-1847332).
+- Blog with native resolutions for [various shows](//anibin.blogspot.com/2017/07/blog-post.html).
+- [Scaling Theory and Algorithms](//www.cambridgeincolour.com/tutorials/image-interpolation.htm), [Part 2](//www.cambridgeincolour.com/tutorials/image-resize-for-web.htm).
+- 2018Jan status update on techniques for [upscaling consumer media to 4k](https://freetime.mikeconnelly.com/archives/1206).
+
+### Audio Theory
+
+- [Audio Frequency and Loudness: Part I - An Introduction to the Basics](https://hometheaterhifi.com/technical/technical-reviews/audio-frequency-loudness-part-introduction-basics/).
+- [Real Sounds and Frequency Composition: Part II](https://hometheaterhifi.com/technical/technical-reviews/real-sounds-frequency-composition-part-ii).
+
+### Encoding and Release Standards
+
+These exist to ensure client hardware decoding compatibility. Please note that compatibility is not emphasized in the Anime community.
+
+- Apple&#39;s [General Authoring Requirements](//developer.apple.com/library/content/documentation/General/Reference/HLSAuthoringSpec/Requirements.html#//apple_ref/doc/uid/TP40016596-CH2-SW1).
+- Youtube&#39;s [Recommended upload encoding settings](//support.google.com/youtube/answer/1722171?hl=en).
+- &quot;Scene&quot; [release standards](//scenerules.org) for [Anime](//scenerules.org/n.html?id=2014_X264-ANIME.nfo), [x264](//scenerules.org/n.html?id=2011_X264.2.nfo), [DVDrips](//scenerules.org/n.html?id=2011_DVDR.nfo), [BDrips](//scenerules.org/n.html?id=2010_BDr.nfo).
+- Microsoft&#39;s [Video Media Types](//docs.microsoft.com/en-us/windows/desktop/medfound/video-media-types) and [supported formats](//docs.microsoft.com/en-us/windows/desktop/medfound/supported-media-formats-in-media-foundation).
+
+### Concrete Guides (completely random)
+
 - Koby/Finayra&#39;s concrete [Beginner&#39;s Guide](//tofincayra.wordpress.com/encoding/beginners-guide), or &quot;Quickstart Guide&quot;, to modern A/V encoding. This guide is a translation of TODO: [eXmendic&#39;s guide] also covers 16-bit filtering (advanced).
 - Installing [HuffYUV on Windows 64-bit](http://www.digitalfaq.com/forum/video-conversion/2193-cannot-install-huffyuv.html#post11627).
 - [Doom9 Forum](http://forum.doom9.org/index.php) and [guides index](http://foro.doom9.org/guides.htm).
@@ -214,69 +252,92 @@ __No excuses__.
   - [Cutting-Splitting-Merging Video and Audio](//yukisubs.files.wordpress.com/2017/06/cutting-splitting-merging-video-and-audio.pdf).
   - [How to make an MKV File From Video, Audio, and Subtitle Files](//yukisubs.files.wordpress.com/2017/06/how-to-make-an-mkv-file-from-video-audio-and-subtitle-files.pdf).
 - Random Software List: [Ask an Experienced Encoder](//dustorrent.com/community/show/ask-experienced-encoder-here), [PDF](//yukisubs.files.wordpress.com/2016/10/ask_an_experienced_encoder.pdf).
-- __Specific Software__ (near top means easier to use, near bottom means full featured)
-  - [Handbrake](//handbrake.fr), and a [Related Guide](//lifehacker.com/5559007/the-hassle-free-guide-to-ripping-your-blu-ray-collection).
-  - vEncode [Project Page](//github.com/gdiaz384/vEncode) and [releases](//github.com/gdiaz384/vEncode/releases). Note: Uses a Command Line Interface (CLI).
-  - [MeGUI](http://www.videohelp.com/software/MeGUI), [Project Thread](http://forum.doom9.org/showthread.php?t=96032), and [Guide](http://www.sevenforums.com/tutorials/104382-video-encoding-x264-megui.html), [PDF](//yukisubs.files.wordpress.com/2016/10/video_encoding_x264_with_megui.pdf).
-  - StaxRip: [VideoHelp page](//www.videohelp.com/software/StaxRip), [GitHub Project Page](//github.com/stax76/staxrip), and [Handbook](//www.gitbook.com/book/stax76/staxrip-handbook/details).
-  - [Hybrid](http://www.videohelp.com/software/Hybrid) supports a Graphical User Interface (GUI).
-    - __FFMPEG__:
-      - Getting Started: [FFmpeg: The ultimate Video and Audio Manipulation Tool](//blog.superuser.com/2012/02/24/ffmpeg-the-ultimate-video-and-audio-manipulation-tool/), [PDF](//yukisubs.files.wordpress.com/2017/04/ffmpeg_the_ultimate_video_and_audio_manipulation_tool.pdf).
-      - Getting Started 2: [A Guide To Video And Audio Conversion Using FFmpeg](http://www.hongkiat.com/blog/ffmpeg-guide).
-      - [Useful FFmpeg Commands](http://www.labnol.org/internet/useful-ffmpeg-commands/28490).
-      - [FFmpeg and H.264 Encoding Guide](//trac.ffmpeg.org/wiki/Encode/H.264).
-      - [How to burn subtitles into the video](//trac.ffmpeg.org/wiki/HowToBurnSubtitlesIntoVideo).
-      - Official [source and binaries](//ffmpeg.org/download.html), [Cross Compiling for Windows](//trac.ffmpeg.org/wiki/CompilationGuide/CrossCompilingForWindows), [build helpers](//github.com/rdp/ffmpeg-windows-build-helpers), and Todo: nvenc compile guide and [3.2 binaries].
-      - [FFmpeg wiki](//trac.ffmpeg.org/wiki), Official [Cryptic Documentation](//ffmpeg.org/ffmpeg.html), cryptic [Arch Docs](//wiki.archlinux.org/index.php/FFmpeg).
-      - Advanced guide to [Creating Multiple Outputs](//trac.ffmpeg.org/wiki/Creating%20multiple%20outputs) (simultaneous 480p, 720p, and 1080p encoding).
-  - [x264 Project Page](//www.videolan.org/developers/x264.html), [Documentation](http://www.chaneru.com/Roku/HLS/X264_Settings.htm), and [binaries](//download.videolan.org/x264/binaries).
-  - [x265 Information](http://x265.org), [Documentation](//x265.readthedocs.io/en/default/introduction.html) and [binaries](http://msystem.waw.pl/x265).
-- __Audio Encoding__:
-  - [FFMPEG High Quality Audio Guide](//trac.ffmpeg.org/wiki/Encode/HighQualityAudio).
-  - [eac3to](http://www.videohelp.com/software/eac3to): Command Line Interface (CLI) audio encoding tool with many Graphical User Interfaces (GUIs) available.
-  - DarkDream787&#39;s [How to Encode High Quality Audio From DVDs/BDs](//yukisubs.files.wordpress.com/2017/06/how-to-encode-high-quality-audio-from-dvds-and-blu-rays.pdf).
-  - Opus codec [Comparison](//opus-codec.org/comparison) and [FAQ](//wiki.xiph.org/OpusFAQ).
-- __Playback (Computer)__:
-  - For DVDs, diagnostics and saving network streams (NOT normal viewing): [VLC Media Player](//www.videolan.org/index.html).
-  - For Windows pick ONE (will install MPC and [LAV](//www.videohelp.com/software/LAV-Filters-Megamix) automatically):
-    - [Combined Community Codec Pack (CCCP)](http://www.cccp-project.net). (lightweight, but playback only)
-    - [K-Lite Codec Pack](//www.codecguide.com/download_k-lite_codec_pack_mega.htm). (Mega pack contains VFW codecs for encoders.)
-    - [Kawaii Codec Pack (KCP)](http://haruhichan.com/forum/showthread.php?7545-KCP-Kawaii-Codec-Pack).
-  - [MediaInfo](//sourceforge.net/projects/mediainfo) is installed automatically with K-Lite CP. Otherwise, install it manually if necessary.
-  - [mpv](//mpv.io), [prescalers](//github.com/bjin/mpv-prescalers), is a modern fork of MPlayer. mpv [FAQ](//github.com/mpv-player/mpv/wiki/FAQ), [Wiki](//github.com/mpv-player/mpv/wiki) and Moodkiller&#39;s [guide](//kametsu.com/topic/63120-mpv-made-easy-moodkiller-edition).
-    - [MPlayer](//www.mplayerhq.hu) is a cross platform media player. ArchLinux&#39;s [documentation](//wiki.archlinux.org/index.php/MPlayer), and official [technical documentation](//www.mplayerhq.hu/DOCS/HTML/en/index.html).
-  - Advanced tips on [LAV splitter stream selection](https://1f0.de/lav-splitter/lav-splitter-stream-selection/).
-  - [madVR](http://madvr.com), [FAQ](http://forum.doom9.org/showthread.php?t=146228), is a gpu-accelerated &quot;renderer&quot; that can display video with increased fidelity compared to default settings. It also supports realtime filters for sharpening, color correction and other things. The implementation is as a Windows plug-in for various players including MPC-HC and mpv. After being automatically installed with K-Lite Codec Pack or installed manually, it must be selected for use within the player, hence the following guides:
-    - Kametsu guide for [MPC-HC + LAV/madVR/xy-subfilter](//kametsu.com/topic/58428-guide-installing-mpc-hc-with-madvr-lavfilters-xysubfilter-and-icaros).
-    - Or for mpv: [Scum&#39;s Raws guide](//iamscum.wordpress.com/videoplayback-guide).
-    - Some more: [ranpha&#39;s PotPlayer guide](//imouto.my/tutorials/configuring-potplayer-for-gpu-accelerated-video-playback-with-dxva-or-cuda-and-also-high-performance-software-decoding/), [BakaBT Wiki](http://wiki.bakabt.me/index.php/Hi10P), [CoalGirls - 2011](//coalgirls.wakku.to/faq/playback/setup-guide-for-mpc-hc-madvr), [another one](//shittastes.wordpress.com/tutorials/properly-installing-and-setting-up-mpc-hc/) and finally [Nand&#39;s Guide](http://haruhichan.com/wpblog/205/hi10p-info-guide/), [mirror](http://archive.is/VnjWi), [PDF](//yukisubs.files.wordpress.com/2018/02/hi10pforanimefans_and_playbackguide_bynand_haruhichan.pdf).
-    - Advanced: ranpha&#39;s very detailed [madVR settings configuration guide](//imouto.my/tutorials/madvr/), [PDF](//yukisubs.files.wordpress.com/2018/02/madvrconfiguration_-by_ranpha.pdf).
-- __Playback (HTPC)__:
-  - Remote: Use [this](//www.amazon.com/Windows-Control-Infrared-Receiver-Ultimate/dp/B00224ZDFY/ref=sr_1_1?ie=UTF8&qid=1334779407&sr=8-1), or
-  - A [wireless keyboard](//www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Delectronics&field-keywords=logitech+wireless+keyboard+with+touchpad), [mini version](//www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313.TR12.TRC2.A0.H0.Xmini+wireless+keyboard.TRS0&_nkw=mini+wireless+keyboard&_sacat=0).
-  - For a dedicated HTPC box: [Kodi](//kodi.tv) (formally XBMC).
-    - Note: Natively, the Raspberry Pi 3 B cannot properly decode 10-bit content.
-    - Notable Variants: [LibreElec](//libreelec.tv), [OpenElec](http://openelec.tv/), [Plex](//www.plex.tv).
-  - For a Client-Server model (recommended): either [Plex](//www.plex.tv) (closed source) or [Emby](//emby.media), formally Media Browser, (open source).
-    - Plex/Emby realtime transcoding (free) means all client devices will always be able to decode streams properly (universal compatibility, including HTML5 web browsers).
-    - Notable Variants: [RasPlex](http://www.rasplex.com), [Kodi&#39;s Plex Add-on](//kodi.tv/plex-add-on-for-kodi), and the Plex Client for Xbox 360.
-    - Plex&#39;s [Full Client List](//forums.plex.tv/discussion/190573/list-of-current-client-product-and-client-platform).
-    - Emby&#39;s [Kodi addon](//emby.media/emby-for-kodi.html), [repository](//github.com/MediaBrowser/plugin.video.emby/wiki/Emby-Repository) (to install the dependencies), and [Full Client List](http://emby.media/download.html).
-    - Random: Check out [Rasplex](http://www.rasplex.com/), [Kodi via OpenElec](//openelec.tv/), [Raspian](//www.raspbian.org), and [RetroPi](//retropie.org.uk).
-  - Or just use an [High-Definition Multimedia Interface](http://www.hdmi.org/consumer/hdmi_advantage.aspx) (HDMI) cable (audio + video) to connect a laptop to a TV temporarily. [HDMI FAQ](http://www.hdmi.org/learningcenter/faq.aspx).
-- __QC__ (?): [Bitrate Viewer](http://www.winhoros.de/docs/bitrate-viewer) Able to estimate the quality of MPEG1 and MPEG2 streams. I do not know how this is useful but Etzimal said to add it. o_o*
+
+### Specific Software
+
+(near top means easier to use, near bottom means full featured)
+
+- [Handbrake](//handbrake.fr), and a [Related Guide](//lifehacker.com/5559007/the-hassle-free-guide-to-ripping-your-blu-ray-collection).
+- vEncode [Project Page](//github.com/gdiaz384/vEncode) and [releases](//github.com/gdiaz384/vEncode/releases). Note: Uses a Command Line Interface (CLI).
+- [MeGUI](http://www.videohelp.com/software/MeGUI), [Project Thread](http://forum.doom9.org/showthread.php?t=96032), and [Guide](http://www.sevenforums.com/tutorials/104382-video-encoding-x264-megui.html), [PDF](//yukisubs.files.wordpress.com/2016/10/video_encoding_x264_with_megui.pdf).
+- StaxRip: [VideoHelp page](//www.videohelp.com/software/StaxRip), [GitHub Project Page](//github.com/stax76/staxrip), and [Handbook](//www.gitbook.com/book/stax76/staxrip-handbook/details).
+- [Hybrid](http://www.videohelp.com/software/Hybrid) supports a Graphical User Interface (GUI).
+
+#### FFMPEG
+
+- Getting Started: [FFmpeg: The ultimate Video and Audio Manipulation Tool](//blog.superuser.com/2012/02/24/ffmpeg-the-ultimate-video-and-audio-manipulation-tool/), [PDF](//yukisubs.files.wordpress.com/2017/04/ffmpeg_the_ultimate_video_and_audio_manipulation_tool.pdf).
+- Getting Started 2: [A Guide To Video And Audio Conversion Using FFmpeg](http://www.hongkiat.com/blog/ffmpeg-guide).
+- [Useful FFmpeg Commands](http://www.labnol.org/internet/useful-ffmpeg-commands/28490).
+- [FFmpeg and H.264 Encoding Guide](//trac.ffmpeg.org/wiki/Encode/H.264).
+- [How to burn subtitles into the video](//trac.ffmpeg.org/wiki/HowToBurnSubtitlesIntoVideo).
+- Official [source and binaries](//ffmpeg.org/download.html), [Cross Compiling for Windows](//trac.ffmpeg.org/wiki/CompilationGuide/CrossCompilingForWindows), [build helpers](//github.com/rdp/ffmpeg-windows-build-helpers), and Todo: nvenc compile guide and [3.2 binaries].
+- [FFmpeg wiki](//trac.ffmpeg.org/wiki), Official [Cryptic Documentation](//ffmpeg.org/ffmpeg.html), cryptic [Arch Docs](//wiki.archlinux.org/index.php/FFmpeg).
+- Advanced guide to [Creating Multiple Outputs](//trac.ffmpeg.org/wiki/Creating%20multiple%20outputs) (simultaneous 480p, 720p, and 1080p encoding).
+  
+#### x264/x265
+
+- [x264 Project Page](//www.videolan.org/developers/x264.html), [Documentation](http://www.chaneru.com/Roku/HLS/X264_Settings.htm), and [binaries](//download.videolan.org/x264/binaries).
+- [x265 Information](http://x265.org), [Documentation](//x265.readthedocs.io/en/default/introduction.html) and [binaries](http://msystem.waw.pl/x265).
+
+### Audio Encoding
+
+- [FFMPEG High Quality Audio Guide](//trac.ffmpeg.org/wiki/Encode/HighQualityAudio).
+- [eac3to](http://www.videohelp.com/software/eac3to): Command Line Interface (CLI) audio encoding tool with many Graphical User Interfaces (GUIs) available.
+- DarkDream787&#39;s [How to Encode High Quality Audio From DVDs/BDs](//yukisubs.files.wordpress.com/2017/06/how-to-encode-high-quality-audio-from-dvds-and-blu-rays.pdf).
+- Opus codec [Comparison](//opus-codec.org/comparison) and [FAQ](//wiki.xiph.org/OpusFAQ).
+
+### QC (?)
+
+[Bitrate Viewer](http://www.winhoros.de/docs/bitrate-viewer) Able to estimate the quality of MPEG1 and MPEG2 streams. I do not know how this is useful but Etzimal said to add it. o_o*
+
+## Playback
+
+### Computer
+
+- For DVDs, diagnostics and saving network streams (NOT normal viewing): [VLC Media Player](//www.videolan.org/index.html).
+- For Windows pick ONE (will install MPC and [LAV](//www.videohelp.com/software/LAV-Filters-Megamix) automatically):
+  - [Combined Community Codec Pack (CCCP)](http://www.cccp-project.net). (lightweight, but playback only)
+  - [K-Lite Codec Pack](//www.codecguide.com/download_k-lite_codec_pack_mega.htm). (Mega pack contains VFW codecs for encoders.)
+  - [Kawaii Codec Pack (KCP)](http://haruhichan.com/forum/showthread.php?7545-KCP-Kawaii-Codec-Pack).
+- [MediaInfo](//sourceforge.net/projects/mediainfo) is installed automatically with K-Lite CP. Otherwise, install it manually if necessary.
+- [mpv](//mpv.io), [prescalers](//github.com/bjin/mpv-prescalers), is a modern fork of MPlayer. mpv [FAQ](//github.com/mpv-player/mpv/wiki/FAQ), [Wiki](//github.com/mpv-player/mpv/wiki) and Moodkiller&#39;s [guide](//kametsu.com/topic/63120-mpv-made-easy-moodkiller-edition).
+  - [MPlayer](//www.mplayerhq.hu) is a cross platform media player. ArchLinux&#39;s [documentation](//wiki.archlinux.org/index.php/MPlayer), and official [technical documentation](//www.mplayerhq.hu/DOCS/HTML/en/index.html).
+- Advanced tips on [LAV splitter stream selection](https://1f0.de/lav-splitter/lav-splitter-stream-selection/).
+- [madVR](http://madvr.com), [FAQ](http://forum.doom9.org/showthread.php?t=146228), is a gpu-accelerated &quot;renderer&quot; that can display video with increased fidelity compared to default settings. It also supports realtime filters for sharpening, color correction and other things. The implementation is as a Windows plug-in for various players including MPC-HC and mpv. After being automatically installed with K-Lite Codec Pack or installed manually, it must be selected for use within the player, hence the following guides:
+  - Kametsu guide for [MPC-HC + LAV/madVR/xy-subfilter](//kametsu.com/topic/58428-guide-installing-mpc-hc-with-madvr-lavfilters-xysubfilter-and-icaros).
+  - Or for mpv: [Scum&#39;s Raws guide](//iamscum.wordpress.com/videoplayback-guide).
+  - Some more: [ranpha&#39;s PotPlayer guide](//imouto.my/tutorials/configuring-potplayer-for-gpu-accelerated-video-playback-with-dxva-or-cuda-and-also-high-performance-software-decoding/), [BakaBT Wiki](http://wiki.bakabt.me/index.php/Hi10P), [CoalGirls - 2011](//coalgirls.wakku.to/faq/playback/setup-guide-for-mpc-hc-madvr), [another one](//shittastes.wordpress.com/tutorials/properly-installing-and-setting-up-mpc-hc/) and finally [Nand&#39;s Guide](http://haruhichan.com/wpblog/205/hi10p-info-guide/), [mirror](http://archive.is/VnjWi), [PDF](//yukisubs.files.wordpress.com/2018/02/hi10pforanimefans_and_playbackguide_bynand_haruhichan.pdf).
+  - Advanced: ranpha&#39;s very detailed [madVR settings configuration guide](//imouto.my/tutorials/madvr/), [PDF](//yukisubs.files.wordpress.com/2018/02/madvrconfiguration_-by_ranpha.pdf).
+
+### HTPC
+
+- Remote: Use [this](//www.amazon.com/Windows-Control-Infrared-Receiver-Ultimate/dp/B00224ZDFY/ref=sr_1_1?ie=UTF8&qid=1334779407&sr=8-1), or
+- A [wireless keyboard](//www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Delectronics&field-keywords=logitech+wireless+keyboard+with+touchpad), [mini version](//www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313.TR12.TRC2.A0.H0.Xmini+wireless+keyboard.TRS0&_nkw=mini+wireless+keyboard&_sacat=0).
+- For a dedicated HTPC box: [Kodi](//kodi.tv) (formally XBMC).
+  - Note: Natively, the Raspberry Pi 3 B cannot properly decode 10-bit content.
+  - Notable Variants: [LibreElec](//libreelec.tv), [OpenElec](http://openelec.tv/), [Plex](//www.plex.tv).
+- For a Client-Server model (recommended): either [Plex](//www.plex.tv) (closed source) or [Emby](//emby.media), formally Media Browser, (open source).
+  - Plex/Emby realtime transcoding (free) means all client devices will always be able to decode streams properly (universal compatibility, including HTML5 web browsers).
+  - Notable Variants: [RasPlex](http://www.rasplex.com), [Kodi&#39;s Plex Add-on](//kodi.tv/plex-add-on-for-kodi), and the Plex Client for Xbox 360.
+  - Plex&#39;s [Full Client List](//forums.plex.tv/discussion/190573/list-of-current-client-product-and-client-platform).
+  - Emby&#39;s [Kodi addon](//emby.media/emby-for-kodi.html), [repository](//github.com/MediaBrowser/plugin.video.emby/wiki/Emby-Repository) (to install the dependencies), and [Full Client List](http://emby.media/download.html).
+  - Random: Check out [Rasplex](http://www.rasplex.com/), [Kodi via OpenElec](//openelec.tv/), [Raspian](//www.raspbian.org), and [RetroPi](//retropie.org.uk).
+- Or just use an [High-Definition Multimedia Interface](http://www.hdmi.org/consumer/hdmi_advantage.aspx) (HDMI) cable (audio + video) to connect a laptop to a TV temporarily. [HDMI FAQ](http://www.hdmi.org/learningcenter/faq.aspx).
 
 ## Muxing and Demuxing
 
-### Theory
+### Muxing and Demuxing Theory
 
 For muxing, the idea is to take multiple discrete files (video, audio, subtitles, fonts) and merge them together into a single file for playback. For demuxing, the idea is to take one file that contains multiple streams and extract out at least one of them.
 
 Muxing typically means shortening, lengthening or delaying streams for syncing. Shortening and delaying are compatible with stream copying techniques. However, any lengthening or modifications done mid-stream will typically require transcoding the entire stream. Thus, the two tasks (encoding and muxing) overlap somewhat.
 
 Demuxing is usually necessary to obtain sources to work from and can be thought of as part of Capping.
-- The typical containers used are either [Matroska](//www.matroska.org/technical/whatis/index.html) (.mkv) with softsubs, fonts and possibly multiple audio streams, or standard MPEG-4 (.mp4) containers with hardsubs and a single audio stream.
-- __Muxing tools__:
+
+The typical containers used are either [Matroska](//www.matroska.org/technical/whatis/index.html) (.mkv) with softsubs, fonts and possibly multiple audio streams, or standard MPEG-4 (.mp4) containers with hardsubs and a single audio stream.
+
+### Muxing tools
+
 - FFMPEG:
   - Read up on the following switches: `-ss -t -to` in the [ffmpeg documentation](//ffmpeg.org/ffmpeg.html#Main-options) and also [this guide](//trac.ffmpeg.org/wiki/Seeking).
   - Use the `-map` switch to extract a non-first stream in multistream files. [FFMPEG documentation](//ffmpeg.org/ffmpeg.html#Advanced-options) and a [related guide](//trac.ffmpeg.org/wiki/Map).
@@ -305,102 +366,133 @@ Demuxing is usually necessary to obtain sources to work from and can be thought 
 
 ## Filtering
 
-- __Preface__: To avoid transcoding multiple times or transferring losslessly encoded video, ideally, Filtering and Encoding should be done by the same person.
-- __Theory__: Filtering tasks beyond [IVTC](http://foro.doom9.org/ivtc-tut.htm) can be thought of as an optional sub-task for encoders. Common filtering tasks include triming length, cutting out advertisements, correcting various studio mistakes and improving subjective visual quality.
-- Encoders that worry about compatibility may also need to hardsub OPs/EDs, or the entire script, into the video stream prior to distro. This can be done at either the Filtering or Encoding stages.
-- Beyond basic tasks, filtering has diminishing returns. It is very time consuming to both learn and implement.
+### Preface
+
+To avoid transcoding multiple times or transferring losslessly encoded video, ideally, Filtering and Encoding should be done by the same person.
+
+### Filtering Theory
+
+Filtering tasks beyond [IVTC](http://foro.doom9.org/ivtc-tut.htm) can be thought of as an optional sub-task for encoders. Common filtering tasks include triming length, cutting out advertisements, correcting various studio mistakes and improving subjective visual quality.
+
+Encoders that worry about compatibility may also need to hardsub OPs/EDs, or the entire script, into the video stream prior to distro. This can be done at either the Filtering or Encoding stages.
+
+Beyond basic tasks, filtering has diminishing returns. It is very time consuming to both learn and implement.
+
 - More Theory:
 - RX Mastering&#39;s [Video Philosophy](https://rxmastering.wordpress.com/video).
 - [Digital Noise Reduction on DVD: Background and Examples](http://www.cinedrome.ch/hometheater/dvd/dnr).
 - Mix of theory and examples: [Digital ICE](//www.youtube.com/watch?v=E0LVjGp1Wtc) (YouTube).
-- __Examples__:
-  - Video restoration: [The power of Avisynth Part III](https://vimeo.com/11133342) and digitized [8mm film](https://vimeo.com/49963017) (vimeo).
-  - [Seirei No Moribito](http://compare.bakashots.me/compare.php?setId=2089), [KissXSis OVA](http://compare.bakashots.me/compare.php?setId=1973&comparisonId=12625), [Hyperdimension Neptunia](http://compare.bakashots.me/compare.php?setId=2028&comparisonId=13099) (all overfiltered but w/e).
-  - Moozzi2&#39;s Rakudai [Before](//yukisubs.files.wordpress.com/2016/10/moozzi2_rakudai_1_before.png) and [After](//yukisubs.files.wordpress.com/2016/10/moozzi2_rakudai_1_after.png).
-  - Subtle filters example: [Case Study: Turn-A Gundam](//rxmastering.wordpress.com/2014/12/03/case-study-turn-a-gundam/).
-  - [NeatVideo](//www.neatvideo.com/examples) - similar to [TemporalDegrain()](http://avisynth.nl/index.php/Temporal_Degrain) for AviSynth.
-  - [Improving Visual Quality with AviSynth Filters](https://www.animemusicvideos.org/guides/avtech31/post-qual.html), [PDF](//yukisubs.files.wordpress.com/2016/10/amv_post_production_-_visual_quality.pdf).
-  - [Using Filters and Functions](http://www.l33tmeatwad.com/vapoursynth101/using-filters-functions) (Vapoursynth).
-- __Understanding and Identifying Artifacts__:
-  - [Understanding Video Compression Artifacts](http://blog.biamp.com/understanding-video-compression-artifacts/).
-  - [Macroblocking vs Mosquito noise](https://hometheaterhifi.com/volume_12_1/algolith-mosquito-video-noise-reducer-3-2005.html).
-  - [Depth of Field](//www.cambridgeincolour.com/tutorials/depth-of-field.htm) and [Hyperfocal Distance](//www.cambridgeincolour.com/tutorials/hyperfocal-distance.htm) theory.
-  - [Understanding Camera Lenses](//www.cambridgeincolour.com/tutorials/camera-lenses.htm).
-    - Using the wrong color matrix while filtering can result in either &quot;Loss of Contrast&quot; or &quot;Vignetting.&quot;
-    - Upscaling creates &quot;Blurring.&quot;
-    - warp sharpening and stabilization create &quot;Distortion.&quot;
-    - Improper capture settings or equipment, especially for analog video, can create chromatic aberrations or &quot;rainbowing&quot;.
-  - [Digital Camera Image Noise - Part 1](//www.cambridgeincolour.com/tutorials/image-noise.htm), and [Part 2](//www.cambridgeincolour.com/tutorials/image-noise-2.htm).
-  - [Guide to Image Sharpening](//www.cambridgeincolour.com/tutorials/image-sharpening.htm).
-  - TODO: Haloing/Ringing, Dot crawl, rainbowing, banding*
-- __Frameworks__:
-  - [__AviSynth__](http://avisynth.nl/index.php/Main_Page):
-    - [AviSynth+](http://avs-plus.net/) (64-bit) and Github [releases page](//github.com/pinterf/AviSynthPlus/releases).
-    - l33tmeatwad&#39;s [AviSynth 101](http://www.l33tmeatwad.com/avisynth101).
-    - [Scintilla&#39;s Guide to AviSynth Postprocessing Filters](http://www.aquilinestudios.org/avsfilters/index.html), [PDF](//yukisubs.files.wordpress.com/2016/10/scintilla_guide_to_avisynth_postprocessing_filters.pdf).
-    - Syntax:
-      - [My First AviSynth Script](http://avisynth.nl/index.php/First_script), and [FAQ](http://avisynth.nl/index.php/AviSynth_FAQ).
-      - [Script Examples](http://avisynth.nl/index.php/Script_examples), and another [random example](http://pastebin.com/jDuP5STF) (was overfiltered but w/e).
-      - AviSynth [CopyFromMe Template](//gist.github.com/YukinoAi/36a9f4c0deb193b1113c8fd10d5d8fc7).
-      - An advanced [16-bit filtering template](//tofincayra.wordpress.com/encoding/basic-avisynth-script).
-    - Filter lists:
-      - [Internal Filters](http://avisynth.nl/index.php/Internal_filters).
-      - [External Filters](http://avisynth.nl/index.php/External_filters).
-      - [MSU Public Filters](http://www.compression.ru/video/public_filters.htm).
-      - real.finder&#39;s [Index](//forum.doom9.org/showthread.php?t=174121).
-      - josemaria.alkala&#39;s [random x86 filters](//bitbucket.org/josemaria.alkala/avisynth_filters/src).
-      - StainlessS&#39;s [repository](//www.mediafire.com/folder/hb26mthbjz7z6/StainlessS).
-    - Misc:
-      - [nnedi3](http://avisynth.nl/index.php/Nnedi3), [binaries](https://github.com/jpsdr/NNEDI3/releases/), and [nnedi3_resize16](https://www.nmm-hd.org/newbbs/viewtopic.php?f=7&t=1117). &quot;[...] NNEDI3, which was originally designed as an intrafield deinterlacer[, ...] is also useful for enlarging images by powers of two. Compared to earlier NNEDI versions, v3 has an improved predictor neural network architecture and local neighborhood pre-processing. NNEDI3’s neural network consists of 16 to 256 neurons. 32 neurons generally has the best quality for performance.&quot; -[src](https://freetime.mikeconnelly.com/archives/1206)
-      - [Hysteria](//www.animemusicvideos.org/forum/viewtopic.php?t=101471). Line darkner.
-      - [&quot;Tweak&quot; guide](http://avisynth.nl/index.php/Tweak) for fine adjustment of colors. Hint: Use maxsat=15-35.
-      - [Histogram](http://avisynth.nl/index.php/Histogram), [alternative](http://avisynth.nl/index.php/Histograms_in_RGB_%26_CMY). Useful for analyzing colors shifts in color families without separate luma.
-      - [Smooth Video Project (SVP)](https://www.svp-team.com/wiki/Download), [Manual](//www.svp-team.com/wiki/Manual:SVPflow), for frame interpolation. Works with VapourSynth as well.
-      - [SmoothAdjust](https://forum.doom9.org/showthread.php?t=154971). Makes YUV color adjustments. Also see: [Autolevels](http://www.thebattles.net/video/autolevels_comparison.html) and [GamMac](https://forum.doom9.org/showthread.php?t=173695), [2](http://www.filmshooting.com/scripts/forum/viewtopic.php?t=27143).
-      - [WhiteBalance](http://avisynth.nl/index.php/WhiteBalance).
-  - [__VapourSynth__](http://www.vapoursynth.com/about/): alternative to AviSynth with many cross-compatible filters. Requires [Python 3.6](//www.python.org/downloads/release/python-364/).
-    - l33tmeatwad&#39;s [VapourSynth 101](http://www.l33tmeatwad.com/vapoursynth101) and [Using Filters and Functions](http://www.l33tmeatwad.com/vapoursynth101/using-filters-functions).
-    - Official doc&#39;s [installation](http://www.vapoursynth.com/doc/installation.html), and [Getting Started](http://www.vapoursynth.com/doc/gettingstarted.html). l33tmeatwad&#39;s [VapourSynth Install Guide](//www.animemusicvideos.org/forum/viewtopic.php?t=125039).
-    - eXmendiC&#39;s [Filtering With VapourSynth](//iamscum.wordpress.com/encoding-stuff/filtering-with-vapoursynth), [PDF](//yukisubs.files.wordpress.com/2017/09/filtering_with_vapoursynth_by_exmendic.pdf).
-    - Encoding from .vpy files is done using [vspipe.exe](http://www.vapoursynth.com/doc/vspipe.html). Options:
-      1. See [this guide](//iamscum.wordpress.com/encoding-stuff/x264-encoding-with-vapoursynth).
-      2. Use an ffmpeg/x264/x265 frontend like [vEncode](//github.com/gdiaz384/vEncode) that incorporates vspipe.exe. See the &quot;Encoding: Specific Software&quot; section for alternatives.
-      3. Interlace the .vpy in a .avs file and encode as a normal .avs file. See [VapourSource](http://avisynth.nl/index.php/VapourSource).
-    - Filter lists:
-      - [Official Plugins List](http://www.vapoursynth.com/doc/pluginlist.html) (includes [BM3D](//github.com/HomeOfVapourSynthEvolution/VapourSynth-BM3D) and [waifu2x-caffe](//github.com/HomeOfVapourSynthEvolution/VapourSynth-Waifu2x-caffe)).
-      - VapourSynth Evolution&#39;s [Filter Index](https://github.com/HomeOfVapourSynthEvolution).
-      - HolyWu&#39;s [HAvsFunc ported function list](//forum.doom9.org/showthread.php?t=166582).
-      - Irrational-Encoding-Wizardry&#39;s [Github Homepage](//github.com/Irrational-Encoding-Wizardry). Motto: &quot;A bunch of autists making encodes better for muggles.&quot;
-      - vfrmaniac&#39;s [&quot;works&quot; index](https://vfrmaniac.fushizen.eu/works/) (includes FFT3DFilter binary).
-    - Vapoursynth [CopyFromMe Template](//gist.github.com/YukinoAi/fa90db376296d5673fd2a2f0e4442ee3).
-  - [__VirtualDub__](http://virtualdub.org/index.html), [v2](//www.videohelp.com/software/VirtualDub2):
-    - [Interesting History](http://www.virtualdub.org/virtualdub_history.html).
-    - For stabalization: [Deshaker](http://www.guthspot.se/video/deshaker.htm), [PDF](//yukisubs.files.wordpress.com/2018/02/deshaker-video-stabilizer.pdf).
-      - [Random youtube video](//www.youtube.com/watch?v=nIo_AuYRVj0) on Deshaker
-      - Todo: some sane example settings go here.
-        - Color correction: [ColorMill](http://fdump.narod.ru/rgb.htm) and [guide](http://www.infognition.com/tutorials/color_correction/).
-- Additional programs used:
-  - [AvsPmod](//avspmod.github.io), Integrated Development Enviornment (IDE) for AviSynth and VapourSynth. todo: put additional DDL link here.
-  - VapourSynth Editor (vsedit), Alternative IDE for VapourSynth. [Thread](//forum.doom9.org/showthread.php?t=170965) and [Project Page](//bitbucket.org/mystery_keeper/vapoursynth-editor).
-  - [Yunno](//yuuno.encode.moe) = [Jupyter](//jupyter.org) + VapourSynth. Alternative IDE to vsedit. Additional dependencies: [Jupyter](//jupyter.org/install.html) and [iPython](//ipython.readthedocs.io/en/stable/install/index.html).
-  - Note: [MPC-x86-Portable](//mpc-hc.org/downloads), or the 64-bit version if using AviSynth+, can load .avs files directly.
-  - Waifu2x for upscaling and/or denoising.
-    - See [combined example results](http://diff.pics/nmS9GmlpSUV7/5) and [upscaling component only example](//diff.pics/vJ5W2v4l0q9y/1).
-    - Note: Some caffe versions of waifu2x can use nvidia&#39;s CUDA Deep Neural Network (CUDNN) library instead of OpenCL/AVX. These versions are faster but require 64-bit Windows, a [CUDNN capable GPU](//developer.nvidia.com/cuda-gpus), i.e. compute capability 3.0+, and [nvidia_CUDNN.dll.7z](//mega.nz/#F!wUYwDSgA!8tx_37HUBcs9KqPhkk5FmQ). Most versions also have a &quot;CPU only&quot; mode.
-    - [waifu2x-caffe-VapourSynth](//github.com/HomeOfVapourSynthEvolution/VapourSynth-Waifu2x-caffe) variant for VapourSynth that supports CUDA/CUDNN.
-    - [waifu2x-caffe-VapourSynth-w2xc](//github.com/HomeOfVapourSynthEvolution/VapourSynth-Waifu2x-w2xc) variant for VapourSynth that supports OpenCL 1.2.
-      - [waifu2x-caffe](//github.com/lltcggie/waifu2x-caffe) standalone variant that supports CUDNN that can work with video as an image sequence. Important: This version also contains the /models folder required by the VapourSynth variants above.
-      - [waifu2x-converter-cpp](//github.com/tanakamura/waifu2x-converter-cpp) and [DeadSix27&#39;s Fork](//github.com/DeadSix27/waifu2x-converter-cpp) is an older CLI standalone (no framework) CUDA/OpenCL/AVX implementation. [koroshell GUI](http://inatsuka.com/extra/koroshell/).
-      - [AutoWaifu](//autowaifu.azurewebsites.net).
-- Further reading:
-  - [kageru.moe/blog/encode](//kageru.moe/blog/encode/).
-  - Abstract: [Javascript Video Filtering](//tp7.github.io/articles/javascript-video-filtering).
-- __Scene Filtering__: This is an optional subcomponent of filtering which is an optional sub-component of encoding, which is an optional sub-component of capturing. In other words, stay away.
-  - Basic: frameTools&#39;s sceneFilter(). See the [documentation](//github.com/gdiaz384/frameTools) and [releases page](//github.com/gdiaz384/frameTools/releases).
-  - More efficient and recommended: tp7&#39;s [Efficient scenefiltering with AviSynth](//tp7.github.io/articles/scenefiltering), [PDF](//yukisubs.files.wordpress.com/2017/09/efficient-scenefiltering_with_avisynth_by_tp7.pdf).
-    - [RemapFrames](http://avisynth.nl/index.php?title=RemapFrames), [PDF guide](//yukisubs.files.wordpress.com/2018/02/remapframes_041.pdf), Groucho&#39;s [AviSynth binary](https://forum.doom9.org/showthread.php?t=173259) and Frechdachs&#39;s [VapourSynth script](//gist.github.com/Frechdachs/353f6917d78bb99d93bfcea0f29062ed#file-fvsfunc-py-L822).
-- __Working with Groups of Pictures (GOPs)__: Scene filtering can also be done in [Photoshop](//www.photoshop.com/products/photoshopelements) or [Gimp](//www.gimp.org) one frame at a time. Manually editing each frame could be described as an optional component of scene-filtering.
-- Mandatory reading: [Understanding FFMPEG&#39;s Group of Pictures (GOP) Options](//esoterictek.blogspot.com/2017/04/understanding-ffmpegs-group-of-pictures.html).
+
+### Examples
+
+- Video restoration: [The power of Avisynth Part III](https://vimeo.com/11133342) and digitized [8mm film](https://vimeo.com/49963017) (vimeo).
+- [Seirei No Moribito](http://compare.bakashots.me/compare.php?setId=2089), [KissXSis OVA](http://compare.bakashots.me/compare.php?setId=1973&comparisonId=12625), [Hyperdimension Neptunia](http://compare.bakashots.me/compare.php?setId=2028&comparisonId=13099) (all overfiltered but w/e).
+- Moozzi2&#39;s Rakudai [Before](//yukisubs.files.wordpress.com/2016/10/moozzi2_rakudai_1_before.png) and [After](//yukisubs.files.wordpress.com/2016/10/moozzi2_rakudai_1_after.png).
+- Subtle filters example: [Case Study: Turn-A Gundam](//rxmastering.wordpress.com/2014/12/03/case-study-turn-a-gundam/).
+- [NeatVideo](//www.neatvideo.com/examples) - similar to [TemporalDegrain()](http://avisynth.nl/index.php/Temporal_Degrain) for AviSynth.
+- [Improving Visual Quality with AviSynth Filters](https://www.animemusicvideos.org/guides/avtech31/post-qual.html), [PDF](//yukisubs.files.wordpress.com/2016/10/amv_post_production_-_visual_quality.pdf).
+- [Using Filters and Functions](http://www.l33tmeatwad.com/vapoursynth101/using-filters-functions) (Vapoursynth).
+
+### Understanding and Identifying Artifacts
+
+- [Understanding Video Compression Artifacts](http://blog.biamp.com/understanding-video-compression-artifacts/).
+- [Macroblocking vs Mosquito noise](https://hometheaterhifi.com/volume_12_1/algolith-mosquito-video-noise-reducer-3-2005.html).
+- [Depth of Field](//www.cambridgeincolour.com/tutorials/depth-of-field.htm) and [Hyperfocal Distance](//www.cambridgeincolour.com/tutorials/hyperfocal-distance.htm) theory.
+- [Understanding Camera Lenses](//www.cambridgeincolour.com/tutorials/camera-lenses.htm).
+  - Using the wrong color matrix while filtering can result in either &quot;Loss of Contrast&quot; or &quot;Vignetting.&quot;
+  - Upscaling creates &quot;Blurring.&quot;
+  - warp sharpening and stabilization create &quot;Distortion.&quot;
+  - Improper capture settings or equipment, especially for analog video, can create chromatic aberrations or &quot;rainbowing&quot;.
+- [Digital Camera Image Noise - Part 1](//www.cambridgeincolour.com/tutorials/image-noise.htm), and [Part 2](//www.cambridgeincolour.com/tutorials/image-noise-2.htm).
+- [Guide to Image Sharpening](//www.cambridgeincolour.com/tutorials/image-sharpening.htm).
+- TODO: Haloing/Ringing, Dot crawl, rainbowing, banding*
+
+### Frameworks
+
+#### [AviSynth](http://avisynth.nl/index.php/Main_Page)
+
+- [AviSynth+](http://avs-plus.net/) (64-bit) and Github [releases page](//github.com/pinterf/AviSynthPlus/releases).
+- l33tmeatwad&#39;s [AviSynth 101](http://www.l33tmeatwad.com/avisynth101).
+- [Scintilla&#39;s Guide to AviSynth Postprocessing Filters](http://www.aquilinestudios.org/avsfilters/index.html), [PDF](//yukisubs.files.wordpress.com/2016/10/scintilla_guide_to_avisynth_postprocessing_filters.pdf).
+- Syntax:
+  - [My First AviSynth Script](http://avisynth.nl/index.php/First_script), and [FAQ](http://avisynth.nl/index.php/AviSynth_FAQ).
+  - [Script Examples](http://avisynth.nl/index.php/Script_examples), and another [random example](http://pastebin.com/jDuP5STF) (was overfiltered but w/e).
+  - AviSynth [CopyFromMe Template](//gist.github.com/YukinoAi/36a9f4c0deb193b1113c8fd10d5d8fc7).
+  - An advanced [16-bit filtering template](//tofincayra.wordpress.com/encoding/basic-avisynth-script).
+- Filter lists:
+  - [Internal Filters](http://avisynth.nl/index.php/Internal_filters).
+  - [External Filters](http://avisynth.nl/index.php/External_filters).
+  - [MSU Public Filters](http://www.compression.ru/video/public_filters.htm).
+  - real.finder&#39;s [Index](//forum.doom9.org/showthread.php?t=174121).
+  - josemaria.alkala&#39;s [random x86 filters](//bitbucket.org/josemaria.alkala/avisynth_filters/src).
+  - StainlessS&#39;s [repository](//www.mediafire.com/folder/hb26mthbjz7z6/StainlessS).
+- Misc:
+  - [nnedi3](http://avisynth.nl/index.php/Nnedi3), [binaries](https://github.com/jpsdr/NNEDI3/releases/), and [nnedi3_resize16](https://www.nmm-hd.org/newbbs/viewtopic.php?f=7&t=1117). &quot;[...] NNEDI3, which was originally designed as an intrafield deinterlacer[, ...] is also useful for enlarging images by powers of two. Compared to earlier NNEDI versions, v3 has an improved predictor neural network architecture and local neighborhood pre-processing. NNEDI3’s neural network consists of 16 to 256 neurons. 32 neurons generally has the best quality for performance.&quot; -[src](https://freetime.mikeconnelly.com/archives/1206)
+  - [Hysteria](//www.animemusicvideos.org/forum/viewtopic.php?t=101471). Line darkner.
+  - [&quot;Tweak&quot; guide](http://avisynth.nl/index.php/Tweak) for fine adjustment of colors. Hint: Use maxsat=15-35.
+  - [Histogram](http://avisynth.nl/index.php/Histogram), [alternative](http://avisynth.nl/index.php/Histograms_in_RGB_%26_CMY). Useful for analyzing colors shifts in color families without separate luma.
+  - [Smooth Video Project (SVP)](https://www.svp-team.com/wiki/Download), [Manual](//www.svp-team.com/wiki/Manual:SVPflow), for frame interpolation. Works with VapourSynth as well.
+  - [SmoothAdjust](https://forum.doom9.org/showthread.php?t=154971). Makes YUV color adjustments. Also see: [Autolevels](http://www.thebattles.net/video/autolevels_comparison.html) and [GamMac](https://forum.doom9.org/showthread.php?t=173695), [2](http://www.filmshooting.com/scripts/forum/viewtopic.php?t=27143).
+  - [WhiteBalance](http://avisynth.nl/index.php/WhiteBalance).
+
+#### [VapourSynth](http://www.vapoursynth.com/about/)
+
+Alternative to AviSynth with many cross-compatible filters. Requires [Python 3.6](//www.python.org/downloads/release/python-364/).
+
+- l33tmeatwad&#39;s [VapourSynth 101](http://www.l33tmeatwad.com/vapoursynth101) and [Using Filters and Functions](http://www.l33tmeatwad.com/vapoursynth101/using-filters-functions).
+- Official doc&#39;s [installation](http://www.vapoursynth.com/doc/installation.html), and [Getting Started](http://www.vapoursynth.com/doc/gettingstarted.html). l33tmeatwad&#39;s [VapourSynth Install Guide](//www.animemusicvideos.org/forum/viewtopic.php?t=125039).
+- eXmendiC&#39;s [Filtering With VapourSynth](//iamscum.wordpress.com/encoding-stuff/filtering-with-vapoursynth), [PDF](//yukisubs.files.wordpress.com/2017/09/filtering_with_vapoursynth_by_exmendic.pdf).
+- Encoding from .vpy files is done using [vspipe.exe](http://www.vapoursynth.com/doc/vspipe.html). Options:
+  1. See [this guide](//iamscum.wordpress.com/encoding-stuff/x264-encoding-with-vapoursynth).
+  2. Use an ffmpeg/x264/x265 frontend like [vEncode](//github.com/gdiaz384/vEncode) that incorporates vspipe.exe. See the &quot;Encoding: Specific Software&quot; section for alternatives.
+  3. Interlace the .vpy in a .avs file and encode as a normal .avs file. See [VapourSource](http://avisynth.nl/index.php/VapourSource).
+- Filter lists:
+  - [Official Plugins List](http://www.vapoursynth.com/doc/pluginlist.html) (includes [BM3D](//github.com/HomeOfVapourSynthEvolution/VapourSynth-BM3D) and [waifu2x-caffe](//github.com/HomeOfVapourSynthEvolution/VapourSynth-Waifu2x-caffe)).
+  - VapourSynth Evolution&#39;s [Filter Index](https://github.com/HomeOfVapourSynthEvolution).
+  - HolyWu&#39;s [HAvsFunc ported function list](//forum.doom9.org/showthread.php?t=166582).
+  - Irrational-Encoding-Wizardry&#39;s [Github Homepage](//github.com/Irrational-Encoding-Wizardry). Motto: &quot;A bunch of autists making encodes better for muggles.&quot;
+  - vfrmaniac&#39;s [&quot;works&quot; index](https://vfrmaniac.fushizen.eu/works/) (includes FFT3DFilter binary).
+- Vapoursynth [CopyFromMe Template](//gist.github.com/YukinoAi/fa90db376296d5673fd2a2f0e4442ee3).
+- [__VirtualDub__](http://virtualdub.org/index.html), [v2](//www.videohelp.com/software/VirtualDub2):
+- [Interesting History](http://www.virtualdub.org/virtualdub_history.html).
+- For stabalization: [Deshaker](http://www.guthspot.se/video/deshaker.htm), [PDF](//yukisubs.files.wordpress.com/2018/02/deshaker-video-stabilizer.pdf).
+  - [Random youtube video](//www.youtube.com/watch?v=nIo_AuYRVj0) on Deshaker
+  - Todo: some sane example settings go here.
+    - Color correction: [ColorMill](http://fdump.narod.ru/rgb.htm) and [guide](http://www.infognition.com/tutorials/color_correction/).
+
+#### Additional programs used
+
+- [AvsPmod](//avspmod.github.io), Integrated Development Enviornment (IDE) for AviSynth and VapourSynth. todo: put additional DDL link here.
+- VapourSynth Editor (vsedit), Alternative IDE for VapourSynth. [Thread](//forum.doom9.org/showthread.php?t=170965) and [Project Page](//bitbucket.org/mystery_keeper/vapoursynth-editor).
+- [Yunno](//yuuno.encode.moe) = [Jupyter](//jupyter.org) + VapourSynth. Alternative IDE to vsedit. Additional dependencies: [Jupyter](//jupyter.org/install.html) and [iPython](//ipython.readthedocs.io/en/stable/install/index.html).
+- Note: [MPC-x86-Portable](//mpc-hc.org/downloads), or the 64-bit version if using AviSynth+, can load .avs files directly.
+- Waifu2x for upscaling and/or denoising.
+  - See [combined example results](http://diff.pics/nmS9GmlpSUV7/5) and [upscaling component only example](//diff.pics/vJ5W2v4l0q9y/1).
+  - Note: Some caffe versions of waifu2x can use nvidia&#39;s CUDA Deep Neural Network (CUDNN) library instead of OpenCL/AVX. These versions are faster but require 64-bit Windows, a [CUDNN capable GPU](//developer.nvidia.com/cuda-gpus), i.e. compute capability 3.0+, and [nvidia_CUDNN.dll.7z](//mega.nz/#F!wUYwDSgA!8tx_37HUBcs9KqPhkk5FmQ). Most versions also have a &quot;CPU only&quot; mode.
+  - [waifu2x-caffe-VapourSynth](//github.com/HomeOfVapourSynthEvolution/VapourSynth-Waifu2x-caffe) variant for VapourSynth that supports CUDA/CUDNN.
+  - [waifu2x-caffe-VapourSynth-w2xc](//github.com/HomeOfVapourSynthEvolution/VapourSynth-Waifu2x-w2xc) variant for VapourSynth that supports OpenCL 1.2.
+    - [waifu2x-caffe](//github.com/lltcggie/waifu2x-caffe) standalone variant that supports CUDNN that can work with video as an image sequence. Important: This version also contains the /models folder required by the VapourSynth variants above.
+    - [waifu2x-converter-cpp](//github.com/tanakamura/waifu2x-converter-cpp) and [DeadSix27&#39;s Fork](//github.com/DeadSix27/waifu2x-converter-cpp) is an older CLI standalone (no framework) CUDA/OpenCL/AVX implementation. [koroshell GUI](http://inatsuka.com/extra/koroshell/).
+    - [AutoWaifu](//autowaifu.azurewebsites.net).
+
+#### Further reading
+
+- [kageru.moe/blog/encode](//kageru.moe/blog/encode/) and Abstract [Javascript Video Filtering](//tp7.github.io/articles/javascript-video-filtering).
+
+### Scene Filtering
+
+This is an optional subcomponent of filtering which is an optional sub-component of encoding, which is an optional sub-component of capturing. In other words, stay away.
+
+- Basic: frameTools&#39;s sceneFilter(). See the [documentation](//github.com/gdiaz384/frameTools) and [releases page](//github.com/gdiaz384/frameTools/releases).
+- More efficient and recommended: tp7&#39;s [Efficient scenefiltering with AviSynth](//tp7.github.io/articles/scenefiltering), [PDF](//yukisubs.files.wordpress.com/2017/09/efficient-scenefiltering_with_avisynth_by_tp7.pdf).
+  - [RemapFrames](http://avisynth.nl/index.php?title=RemapFrames), [PDF guide](//yukisubs.files.wordpress.com/2018/02/remapframes_041.pdf), Groucho&#39;s [AviSynth binary](https://forum.doom9.org/showthread.php?t=173259) and Frechdachs&#39;s [VapourSynth script](//gist.github.com/Frechdachs/353f6917d78bb99d93bfcea0f29062ed#file-fvsfunc-py-L822).
+
+### Working with Groups of Pictures (GOPs)
+
+Scene filtering can also be done in [Photoshop](//www.photoshop.com/products/photoshopelements) or [Gimp](//www.gimp.org) one frame at a time. Manually editing each frame could be described as an optional component of scene-filtering.
+
+Mandatory reading: [Understanding FFMPEG&#39;s Group of Pictures (GOP) Options](//esoterictek.blogspot.com/2017/04/understanding-ffmpegs-group-of-pictures.html).
+
 - Cambridge colour&#39;s [Photo Editing Tutorials](//www.cambridgeincolour.com/photo-editing-tutorials.htm) and [Digital Photo Restoration](//www.cambridgeincolour.com/tutorials/digital-photo-restoration.htm).
 - Adobe&#39;s Photoshop [Retouch and repair photos](//helpx.adobe.com/photoshop/using/retouching-repairing-images.html) user guide.
 - [Panorama basics](//www.cambridgeincolour.com/tutorials/digital-panoramas.htm) and [How to Auto-Align Layers](https://www.dummies.com/software/adobe/photoshop/how-to-auto-align-layers-in-photoshop-cs6/). Useful for later reanimating panning scenes in Premiere.
@@ -422,18 +514,24 @@ Demuxing is usually necessary to obtain sources to work from and can be thought 
     - [syntax example](//gist.github.com/YukinoAi/bb053f9e4d65155d3123ead9fa03a18e).
 - Image Viewers: [InfranView](//www.irfanview.com) or your favorite graphical HTTP client.
 - For batch image procesing: [Photoshop Macros](//helpx.adobe.com/photoshop/using/creating-actions.html), [ImageMagick](//www.imagemagick.org/script/command-line-processing.php) (very advanced) and [waifu2x-caffe](//github.com/lltcggie/waifu2x-caffe).
-- __Masktools__:
-  - [Masktools](http://avisynth.nl/index.php/MaskTools2), [PDF](//yukisubs.files.wordpress.com/2018/02/masktools2_-_avisynth_wiki.pdf), provides an efficent way to select parts of a video frame but not others. If combined with other concepts, like motion compensation and edge detection, masktools allows filters to selectively target aspects within a frame for many consecutive frames. Neither scene filtering techniques, which are clip-based, nor image editing techniques allow for the flexibility and efficency that Masktools can provide.
-  - tp7&#39;s [MaskTools 2 theory](//tp7.github.io/articles/masktools), [PDF](//yukisubs.files.wordpress.com/2018/02/masktools_2_by_tp7.pdf).
-  - tp7&#39;s MaskTools for beginners and generally: Translation from Russian: [PDF](//yukisubs.files.wordpress.com/2018/02/masktools_for_beginners_and_generally-tp7.pdf). Original link:
-    - `http://web.archive.org/web/20160312025423/http://tp7.ruanime.org/masktools/index.html`
-  - 06_taro&#39;s [MaskTools guide](https://www.nmm-hd.org/newbbs/viewtopic.php?f=7&t=770). Translation from Chinese [PDF - Page 1](//yukisubs.files.wordpress.com/2018/02/tutorial_masktools_getting_started_tutorial_-nmm-hd_1.pdf) and [PDF - Part 2](//yukisubs.files.wordpress.com/2018/02/tutorial_tutorial_for_masktools_-_page_2_-_nmm-hd.pdf).
-  - Further reading: [Edge Masks](https://kageru.moe/blog/article/edgemasks/) in Vapoursynth by [Kageru](//github.com/kageru).
-- __Real-time filtering__: The idea is to get playback without having to transcode the video.
-  - [SmoothVideo Project (SVP)](//www.svp-team.com/wiki/Main_Page), [example](//www.youtube.com/watch?v=4J1PYWCJ6tE), for frame interpolation to 60fps. Note: Avisynth/Vapoursynth plugins also available.
-  - Media player GPU accelerated &quot;shaders&quot;: [MPC-HC](https://forum.videohelp.com/threads/372235-Is-there-a-way-to-Paste-MPC-HC-shader-effect-to-a-video), [mpv]. Includes sharpening and scaling filters.
-  - MadVR has quite a few.
-  - With a powerful enough computer and a computationally light enough filter chain, .avs files (AviSynth) can be played directly.
+
+### Masktools
+
+- [Masktools](http://avisynth.nl/index.php/MaskTools2), [PDF](//yukisubs.files.wordpress.com/2018/02/masktools2_-_avisynth_wiki.pdf), provides an efficent way to select parts of a video frame but not others. If combined with other concepts, like motion compensation and edge detection, masktools allows filters to selectively target aspects within a frame for many consecutive frames. Neither scene filtering techniques, which are clip-based, nor image editing techniques allow for the flexibility and efficency that Masktools can provide.
+- tp7&#39;s [MaskTools 2 theory](//tp7.github.io/articles/masktools), [PDF](//yukisubs.files.wordpress.com/2018/02/masktools_2_by_tp7.pdf).
+- tp7&#39;s MaskTools for beginners and generally: Translation from Russian: [PDF](//yukisubs.files.wordpress.com/2018/02/masktools_for_beginners_and_generally-tp7.pdf). Original link:
+  - `http://web.archive.org/web/20160312025423/http://tp7.ruanime.org/masktools/index.html`
+- 06_taro&#39;s [MaskTools guide](https://www.nmm-hd.org/newbbs/viewtopic.php?f=7&t=770). Translation from Chinese [PDF - Page 1](//yukisubs.files.wordpress.com/2018/02/tutorial_masktools_getting_started_tutorial_-nmm-hd_1.pdf) and [PDF - Part 2](//yukisubs.files.wordpress.com/2018/02/tutorial_tutorial_for_masktools_-_page_2_-_nmm-hd.pdf).
+- Further reading: [Edge Masks](https://kageru.moe/blog/article/edgemasks/) in Vapoursynth by [Kageru](//github.com/kageru).
+
+### Real-time filtering
+
+The idea is to get playback without having to transcode the video.
+
+- [SmoothVideo Project (SVP)](//www.svp-team.com/wiki/Main_Page), [example](//www.youtube.com/watch?v=4J1PYWCJ6tE), for frame interpolation to 60fps. Note: Avisynth/Vapoursynth plugins also available.
+- Media player GPU accelerated &quot;shaders&quot;: [MPC-HC](https://forum.videohelp.com/threads/372235-Is-there-a-way-to-Paste-MPC-HC-shader-effect-to-a-video), [mpv]. Includes sharpening and scaling filters.
+- MadVR has quite a few.
+- With a powerful enough computer and a computationally light enough filter chain, .avs files (AviSynth) can be played directly.
 
 ## Translating (TL) + Translate Check (TLC)
 
